@@ -50,11 +50,11 @@ export const azioni = {
     try {
       collega(await accesso.entra());
     } catch (e) {
+      schermataAccesso.impostaInCorso(false);
       schermataAccesso.impostaMessaggio(e.message);
       disegna();
-    } finally {
-      schermataAccesso.impostaInCorso(false);
     }
+    schermataAccesso.impostaInCorso(false);
   },
   "riprova": () => location.reload(),
   // Esce: i progetti restano online e spariscono da questo telefono finché non si rientra
