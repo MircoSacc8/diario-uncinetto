@@ -1,5 +1,14 @@
 # Novità
 
+## v1.5 — 1 novembre 2026 (fase 3)
+- Uncinetto con **tipo** (normale o tunisino) e **misura** scelta da un elenco, per il progetto e, se diverso, per ogni parte (con nota, es. "5 poi 6").
+- Obiettivo di ogni parte **in cm** ("arrivare a 43 cm") oppure in giri. Con i cm, il contagiri mostra a che punto sei e quanti giri mancano circa.
+- **📏 Misura**: si scrive quanto misura il lavoro col metro; da lì la stima parte dalla misura vera.
+- **Campioni**: filato, uncinetto, punto, maglie e giri in 10 cm. Più campioni per progetto, uno principale; ogni parte può usarne un altro.
+- Dalla **larghezza** di una parte l'app propone le catenelle di partenza.
+- "Calcola col campione": cm ↔ giri e cm ↔ maglie.
+- I progetti salvati prima si aggiornano da soli al nuovo formato (dati versione 2), senza perdere nulla.
+
 ## v1.4 — 1 novembre 2026
 - Nuovi colori: beige chiaro e rosa antico (scelti da Mircuz). Anche l'icona è in rosa antico.
 - L'app resta sempre chiara, anche quando l'iPhone è in modalità scura.

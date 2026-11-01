@@ -5,16 +5,17 @@ import { moduloProgetto } from "./progetto.js";
 import { backupDaFare, istruzioniHome } from "./impostazioni.js";
 import { aggiornamentoPronto } from "../pwa/installa.js";
 import { testoStato } from "../firebase/account.js";
+import { campioneDi, percentuale, uncinettoTesto } from "../calcoli/misure.js";
 
 const FILTRI = ["in corso", "finito", "tutti"];
 
 function scheda(p) {
   const a = parteAttiva(p);
-  const percento = a.target ? Math.min(100, (a.rounds / a.target) * 100) : 0;
+  const percento = percentuale(a, campioneDi(p, a));
   const tempo = tempoTrascorso(p);
   const meta = [
     p.parts.length > 1 && esc(a.name),
-    p.hook && `Unc. ${esc(p.hook)} mm`,
+    esc(uncinettoTesto(p.uncinetto, true)),
     tempo > 59999 && durata(tempo, false),
     p.timerStart && '<span class="acceso"></span>timer acceso',
   ].filter(Boolean).join(" · ");
@@ -22,7 +23,7 @@ function scheda(p) {
     <span class="nome">${esc(p.name)}${p.status === "finito" ? '<span class="tag">finito</span>' : ""}</span>
     <span class="conta">${a.rounds}<small>giri</small></span>
     <span class="meta">${meta}</span>
-    ${a.target ? `<span class="barretta"><i style="width:${percento}%"></i></span>` : ""}
+    ${percento !== null ? `<span class="barretta"><i style="width:${percento}%"></i></span>` : ""}
   </button>`;
 }
 

@@ -1,4 +1,4 @@
-# Formato dei dati (versione dati 1)
+# Formato dei dati (versione dati 2)
 
 Salvati nel telefono, chiave `diario-uncinetto` di localStorage.
 
@@ -16,8 +16,9 @@ stato
 |---|---|
 | id, name | identificativo e nome |
 | status | "in corso" oppure "finito" |
-| hook | uncinetto del progetto (testo, es. "5,5") |
-| gauge | campione: giri in 10 cm (0 = non impostato) |
+| uncinetto | `{ tipo: "normale" \| "tunisino", mm }` |
+| campioni[] | `{ id, nome, filato, uncinetto, punto, maglie10, giri10 }` (maglie e giri in 10 cm) |
+| campione | id del campione principale ("" se nessuno) |
 | pattern, notes | schema e appunti |
 | stitchCount | contatore maglie |
 | stitches[] | sigle dei punti usati (da dati/punti.json) |
@@ -31,10 +32,16 @@ stato
 | Campo | Significato |
 |---|---|
 | id, name | identificativo e nome (es. "Manica dx") |
-| rounds, target | giri fatti e giri da fare |
+| rounds | giri fatti |
+| obiettivo | `{ tipo: "giri" \| "cm", valore }` (0 = nessun obiettivo) |
 | start | partenza (es. "50 cat") |
-| hook | uncinetto se diverso dal progetto |
+| larghezza | cm, per proporre le catenelle dal campione |
+| uncinetto | null = come il progetto, altrimenti `{ tipo, mm, nota }` |
+| campione | "" = principale del progetto, altrimenti id di un campione |
+| misure[] | misure col metro: `{ giro, cm, data }` |
 | log[] | promemoria: { id, r: dal giro, to: al giro, t: testo } |
+
+Formato 1 → 2 (`js/dati/migrazioni.js`): `hook` (testo) → `uncinetto`; `gauge` → primo campione con id `campione-{id progetto}`; `target` → `obiettivo` in giri; `hook` della parte → `uncinetto` con nota.
 
 ## Copia online (Firestore, regione eur3)
 `utenti/{uid}/progetti/{id progetto}` → `{ nome, updated, eliminato, json }`, dove `json` è il progetto intero.

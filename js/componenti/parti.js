@@ -1,19 +1,31 @@
 // Le parti di un progetto (es. maniche, posteriore): scorrono in orizzontale, una è attiva.
-import { esc, num } from "../utils/formato.js";
+// Ogni parte ha un obiettivo in giri o in cm, e può avere uncinetto e campione propri.
+import { esc, num, virgola } from "../utils/formato.js";
 import { aggiorna, parteAttiva } from "../dati/stato.js";
 import { nuovaParte } from "../dati/modelli.js";
-import { giriDaCm } from "../calcoli/campione.js";
+import { campioneDi, cmAttuali, percentuale, obiettivoRaggiunto, catenelleDaLarghezza } from "../calcoli/misure.js";
 import { apri, chiudi, pulsanti } from "./finestre.js";
+import * as uncinetto from "./uncinetto.js";
 
-const percento = (x) => Math.min(100, (x.rounds / x.target) * 100);
+function valoreScheda(p, x) {
+  const c = campioneDi(p, x);
+  const fatto = obiettivoRaggiunto(x, c) ? " <small>✓</small>" : "";
+  if (x.obiettivo.tipo === "cm" && x.obiettivo.valore) {
+    const ora = cmAttuali(x, c);
+    return `${ora ? virgola(ora.cm) : "?"} <small>/ ${virgola(x.obiettivo.valore)} cm</small>${fatto}`;
+  }
+  return `${x.rounds}${x.obiettivo.valore ? ` <small>/ ${x.obiettivo.valore}</small>` : ""}${fatto}`;
+}
 
 export function html(p, a) {
-  const schede = p.parts.map((x) => `
-    <button class="parte" data-a="parte" data-v="${x.id}" aria-pressed="${x.id === a.id}">
+  const schede = p.parts.map((x) => {
+    const pct = percentuale(x, campioneDi(p, x));
+    return `<button class="parte" data-a="parte" data-v="${x.id}" aria-pressed="${x.id === a.id}">
       <b>${esc(x.name)}</b>
-      <span>${x.rounds}${x.target ? ` <small>/ ${x.target}</small>` : ""}${x.target && x.rounds >= x.target ? " <small>✓</small>" : ""}</span>
-      ${x.target ? `<span class="mini"><i style="width:${percento(x)}%"></i></span>` : ""}
-    </button>`).join("");
+      <span>${valoreScheda(p, x)}</span>
+      ${pct !== null ? `<span class="mini"><i style="width:${pct}%"></i></span>` : ""}
+    </button>`;
+  }).join("");
   return `<nav class="parti" aria-label="Parti del progetto">${schede}
     <button class="parte aggiungi" data-a="parte-nuova">+ Parte</button></nav>`;
 }
@@ -27,21 +39,48 @@ export function dopoDisegno() {
 }
 
 function modulo(p, x) {
+  const ob = x?.obiettivo || { tipo: "giri", valore: 0 };
+  const sceltaCampione = p.campioni.length > 1 ? `<label for="p-campione">Campione
+      <select id="p-campione" name="campione"><option value="">Principale del progetto</option>${p.campioni.map((c) =>
+        `<option value="${c.id}" ${x?.campione === c.id ? "selected" : ""}>${esc(c.nome || "Campione")}</option>`).join("")}</select></label>` : "";
+  const c = campioneDi(p, x);
   apri(`<h2>${x ? "Modifica parte" : "Nuova parte"}</h2>
     <label for="p-nome">Nome<input id="p-nome" name="name" required value="${esc(x?.name)}" placeholder="Es. Manica dx"></label>
-    <label for="p-inizio">Partenza<input id="p-inizio" name="start" value="${esc(x?.start)}" placeholder="Es. 50 cat"></label>
+
+    <fieldset class="scelta"><legend>Obiettivo</legend>
+      <div class="segmenti">
+        <label><input type="radio" name="ob-tipo" value="cm" ${ob.tipo === "cm" ? "checked" : ""}><span>Arrivare a … cm</span></label>
+        <label><input type="radio" name="ob-tipo" value="giri" ${ob.tipo !== "cm" ? "checked" : ""}><span>Fare … giri</span></label>
+      </div>
+      <label for="p-obiettivo">Quanti (cm o giri)<input id="p-obiettivo" name="ob-valore" inputmode="decimal" value="${ob.valore ? virgola(ob.valore) : ""}" placeholder="Es. 43"></label>
+      <div class="hint">I cm non cambiano se cambi filo: i giri si stimano dal campione e dalle tue misure.</div>
+    </fieldset>
+
     <div class="griglia2">
-      <label for="p-giri">Giri da fare<input id="p-giri" name="target" type="number" min="0" inputmode="numeric" value="${x?.target || ""}"></label>
-      <label for="p-unc">Uncinetto (se diverso)<input id="p-unc" name="hook" value="${esc(x?.hook)}" placeholder="5 poi 6"></label>
+      <label for="p-larghezza">Larghezza (cm)<input id="p-larghezza" name="larghezza" inputmode="decimal" value="${x?.larghezza ? virgola(x.larghezza) : ""}" placeholder="Es. 20"></label>
+      <label for="p-inizio">Partenza<input id="p-inizio" name="start" value="${esc(x?.start)}" placeholder="Es. 50 cat"></label>
     </div>
-    ${p.gauge ? `<label for="p-cm">Oppure lunghezza in cm<input id="p-cm" name="cm" inputmode="decimal" placeholder="Es. 43"></label>
-      <div class="hint">Se scrivi i cm, i giri si calcolano col campione (${p.gauge} giri in 10 cm).</div>` : ""}
+    <div class="hint">${c?.maglie10 ? `Se lasci vuota la partenza, la calcolo dalla larghezza col campione (${c.maglie10} maglie in 10 cm).` : "Con le maglie in 10 cm nel campione, la partenza si calcola dalla larghezza."}</div>
+
+    ${sceltaCampione}
+    <label class="interruttore" for="p-unc-diverso">Uncinetto diverso dal progetto<input id="p-unc-diverso" name="unc-diverso" type="checkbox" ${x?.uncinetto ? "checked" : ""}></label>
+    <div class="se-diverso">${uncinetto.campi("p-unc", x?.uncinetto || p.uncinetto, { conNota: true })}</div>
+
     ${pulsanti("Salva", x && p.parts.length > 1 ? `<button type="button" class="pericolo" data-a="parte-rimuovi">Rimuovi parte</button>` : "")}`,
   (d) => {
-    let target = +d.get("target") || 0;
-    const cm = num(d.get("cm"));
-    if (cm && p.gauge) target = giriDaCm(cm, p.gauge);
-    const valori = { name: d.get("name").trim(), start: d.get("start").trim(), hook: d.get("hook").trim(), target };
+    const valori = {
+      name: d.get("name").trim(),
+      obiettivo: { tipo: d.get("ob-tipo") === "cm" ? "cm" : "giri", valore: num(d.get("ob-valore")) },
+      larghezza: num(d.get("larghezza")),
+      start: d.get("start").trim(),
+      uncinetto: d.get("unc-diverso") ? uncinetto.leggi(d, "p-unc") : null,
+      campione: d.get("campione") || "",
+    };
+    if (valori.obiettivo.tipo === "giri") valori.obiettivo.valore = Math.round(valori.obiettivo.valore);
+    if (!valori.start && valori.larghezza) {
+      const cat = catenelleDaLarghezza(valori.larghezza, campioneDi(p, valori));
+      if (cat) valori.start = `${cat} cat (${virgola(valori.larghezza)} cm)`;
+    }
     if (x) Object.assign(x, valori);
     else { const n = nuovaParte(valori.name, valori); p.parts.push(n); p.active = n.id; }
     p.updated = Date.now();

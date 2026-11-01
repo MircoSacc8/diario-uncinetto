@@ -17,7 +17,8 @@ Leggi prima `docs/ISTRUZIONI.md` (obiettivo, decisioni, piano a fasi, regole di 
 - `js/calcoli/` → funzioni pure (niente DOM), sempre con test in `test/`.
 - `js/componenti/` → ogni componente esporta `html(...)`, `azioni` e se serve `input` / `cambio` (per id del campo).
 - `js/schermate/` → `home.js` (lista) e `progetto.js` (scheda), che compongono i componenti.
-- `dati/` → elenchi in JSON (punti; poi taglie, uncinetti).
+- `dati/` → elenchi in JSON (`punti.json`, `uncinetti.json`; poi taglie).
+- Calcoli di cm, giri e catenelle: `js/calcoli/misure.js` (la misura col metro vince sul campione).
 
 ## Convenzioni
 - Dopo ogni modifica ai dati chiama `aggiorna()` (salva e ridisegna).

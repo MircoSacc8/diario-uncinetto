@@ -138,3 +138,24 @@
 .oppure { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .85rem; }
 .oppure::before, .oppure::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 .conferma { color: var(--mint-ink); background: var(--mint); border-radius: 12px; padding: 10px 12px; }
+
+/* ---- Scelte nei moduli (obiettivo giri/cm, uncinetto diverso) ---- */
+.scelta { display: flex; flex-direction: column; gap: 10px; }
+.scelta legend { font-size: .85rem; color: var(--muted); font-weight: 500; margin-bottom: 6px; }
+.segmenti { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 4px; }
+.segmenti label { display: block; color: var(--ink); font-size: .92rem; }
+.segmenti input { position: absolute; opacity: 0; pointer-events: none; }
+.segmenti span { display: flex; align-items: center; justify-content: center; min-height: 40px; border-radius: 10px; text-align: center; padding: 0 6px; }
+.segmenti input:checked + span { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.segmenti input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+.se-diverso { display: none; flex-direction: column; gap: 10px; }
+form:has(#p-unc-diverso:checked) .se-diverso { display: flex; }
+
+/* ---- Campioni ---- */
+.lista-campioni { display: flex; flex-direction: column; }
+.campione { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; text-align: left; padding: 10px 0; border-bottom: 1px solid var(--line); min-height: var(--tocco); }
+.campione:last-child { border-bottom: 0; }
+.campione .t { min-width: 0; overflow-wrap: anywhere; }
+.campione .t strong { display: block; }
+.campione .t span { color: var(--muted); font-size: .85rem; }
+.campione .misura { font-size: .85rem; font-weight: 600; text-align: right; max-width: 45%; }

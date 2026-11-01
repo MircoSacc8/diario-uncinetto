@@ -15,8 +15,11 @@ import * as convertitore from "./componenti/convertitore.js";
 import * as contatori from "./componenti/contatori.js";
 import * as punti from "./componenti/punti.js";
 import * as filati from "./componenti/filati.js";
+import * as campioni from "./componenti/campioni.js";
+import * as misura from "./componenti/misura.js";
+import * as uncinetto from "./componenti/uncinetto.js";
 
-const moduli = [account, schermataAccesso, home, scheda, impostazioni, finestre, parti, contagiri, promemoria, timer, convertitore, contatori, punti, filati];
+const moduli = [account, schermataAccesso, home, scheda, impostazioni, finestre, parti, contagiri, promemoria, timer, convertitore, contatori, punti, filati, campioni, misura];
 const azioni = Object.assign({}, ...moduli.map((m) => m.azioni || {}));
 const suInput = Object.assign({}, ...moduli.map((m) => m.input || {}));
 const suCambio = Object.assign({}, ...moduli.map((m) => m.cambio || {}));
@@ -75,7 +78,7 @@ async function inizia() {
   finestre.collega();
   quandoCambia(mostra);
   quandoCambia(schermoAcceso);
-  await punti.caricaElenco();
+  await Promise.all([punti.caricaElenco(), uncinetto.caricaElenco()]);
   timer.avviaTicchettio();
   pwa.quandoAggiornamento(disegna);
   pwa.registra();

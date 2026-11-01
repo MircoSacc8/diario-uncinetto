@@ -1,5 +1,5 @@
 // Scheda di un progetto: mette insieme i componenti, più modifica/stato/eliminazione del progetto.
-import { esc, num, ora } from "../utils/formato.js";
+import { esc, ora } from "../utils/formato.js";
 import { S, aggiorna, salva, parteAttiva, fermaTimer, eliminaProgetto } from "../dati/stato.js";
 import { nuovoProgetto } from "../dati/modelli.js";
 import { apri, conferma, pulsanti } from "../componenti/finestre.js";
@@ -11,10 +11,14 @@ import * as convertitore from "../componenti/convertitore.js";
 import * as contatori from "../componenti/contatori.js";
 import * as punti from "../componenti/punti.js";
 import * as filati from "../componenti/filati.js";
+import * as campioni from "../componenti/campioni.js";
+import * as uncinetto from "../componenti/uncinetto.js";
+import { uncinettoTesto, campioneTesto } from "../calcoli/misure.js";
 
 export function html(p) {
   const a = parteAttiva(p);
-  const sopra = [p.hook && `Uncinetto ${esc(p.hook)} mm`, p.gauge && `${p.gauge} giri in 10 cm`, p.status === "finito" && "finito"]
+  const principale = p.campioni.find((c) => c.id === p.campione);
+  const sopra = [esc(uncinettoTesto(p.uncinetto)), principale && esc(campioneTesto(principale)), p.status === "finito" && "finito"]
     .filter(Boolean).join(" · ") || "Progetto";
   return `
     <button class="link" data-a="home" style="align-self:flex-start">← Tutti i progetti</button>
@@ -26,6 +30,7 @@ export function html(p) {
     ${contagiri.html(p, a)}
     ${promemoria.html(a)}
     ${convertitore.html(p)}
+    ${campioni.html(p)}
     ${contatori.html(p)}
     ${punti.html(p)}
     ${filati.html(p)}
@@ -44,15 +49,12 @@ export function html(p) {
 export function moduloProgetto(p) {
   apri(`<h2>${p ? "Modifica progetto" : "Nuovo progetto"}</h2>
     <label for="pr-nome">Nome<input id="pr-nome" name="name" required value="${esc(p?.name)}" placeholder="Es. Borsa a rete"></label>
-    <div class="griglia2">
-      <label for="pr-unc">Uncinetto (mm)<input id="pr-unc" name="hook" inputmode="decimal" value="${esc(p?.hook)}" placeholder="5,5"></label>
-      <label for="pr-camp">Giri in 10 cm<input id="pr-camp" name="gauge" inputmode="decimal" value="${p?.gauge || ""}" placeholder="18"></label>
-    </div>
-    <div class="hint">Con i giri in 10 cm l'app ti dice a quanti cm sei e converte cm in giri.</div>
+    ${uncinetto.campi("pr-unc", p?.uncinetto)}
+    <div class="hint">Il campione (maglie e giri in 10 cm) si aggiunge nella sezione Campioni del progetto.</div>
     <label for="pr-schema">Schema / riferimento<input id="pr-schema" name="pattern" value="${esc(p?.pattern)}" placeholder="Nome dello schema o link"></label>
     ${pulsanti(p ? "Salva" : "Crea")}`,
   (d) => {
-    const valori = { name: d.get("name").trim(), hook: d.get("hook").trim(), gauge: num(d.get("gauge")), pattern: d.get("pattern").trim(), updated: ora() };
+    const valori = { name: d.get("name").trim(), uncinetto: uncinetto.leggi(d, "pr-unc"), pattern: d.get("pattern").trim(), updated: ora() };
     if (p) Object.assign(p, valori);
     else { const n = nuovoProgetto(valori); S.dati.projects.push(n); S.vista.id = n.id; }
   });
