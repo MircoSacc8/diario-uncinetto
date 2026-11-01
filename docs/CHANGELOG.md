@@ -1,5 +1,11 @@
 # Novità
 
+## v1.7 — 1 novembre 2026 (fase 4)
+- Nel progetto si sceglie **come lo lavori**: dal basso in alto, oppure dall'alto (dal collo).
+- Per i progetti dall'alto: **calcolatore dello sprone raglan**. Da scollo, seno, braccio, profondità dello scalfo, agio (predefinito 5 cm corpo, 4 cm maniche, sempre modificabile) e campione calcola: catenelle d'avvio e divisione, giri di aumenti, quando separare le maniche e le catenelle sotto l'ascella.
+- Con un tocco crea la parte **"Sprone"** con tutti i promemoria già scritti.
+- Le misure si possono riempire da una **taglia standard donna o uomo** (tabelle Craft Yarn Council).
+
 ## v1.6 — 1 novembre 2026 (fase 3b)
 - Nuova sezione **Foto** in ogni progetto: **Ispirazione** e **Lavoro finito** (fino a 6 per gruppo), dalla galleria o fatte al momento.
 - Tocca una foto per vederla grande, aggiungere una didascalia o eliminarla.

@@ -56,7 +56,7 @@ Fonte: tabella misure standard per capi all'uncinetto (Hanjan Crochet, basata su
 | Vita | 67,5 | 76 | 86,5 |
 | Fianchi | 91,5 | 101,5 | 111,5 |
 
-Da completare con XS, XL, XXL.
+Tabella completa (donna XS–5XL, uomo S–5XL) in `dati/taglie.json`.
 
 ## Progetto di riferimento: Cardigan Laura (taglia S)
 - Uncinetto 5,5, lavorato dal basso in alto. Campione ricavato: circa 18 giri in 10 cm (20 cm = 36 giri).
@@ -96,7 +96,8 @@ Repository: `MircoSacc8/diario-uncinetto` (pubblica, per GitHub Pages gratuito).
 - **v1.4** (1 nov 2026): colori beige chiaro e rosa antico (scelta B di Mircuz), app sempre chiara anche in modalità scura, icona ricolorata. Mircuz ha provato su iPhone l'accesso con email e password: funziona.
 - **Fase 3** (1 nov 2026, v1.5): uncinetto tipo + mm (progetto e parte), obiettivi parte in cm o giri, 📏 misura col metro (vince sul campione), campioni multipli per filato/uncinetto, catenelle da larghezza, convertitore cm ↔ giri/maglie. Dati versione 2 con migrazione automatica.
 - **Fase 3b** (1 nov 2026, v1.6): foto di ispirazione e del lavoro finito (max 6 per gruppo), didascalia, link alla fonte, miniatura nella lista; foto compresse salvate su telefono (IndexedDB) e online in Firestore `utenti/{uid}/foto/{id}`; incluse nel backup. Dati versione 3.
-- **Poi: fase 4** — direzione di lavoro (dal basso / top-down con aumenti); **fase 5** — taglie e "Rifai in un'altra taglia".
+- **Fase 4** (1 nov 2026, v1.7): direzione di lavoro per progetto (dal basso / dall'alto). Calcolatore sprone raglan top-down (avvio, divisione 1/3 dietro, 1/3 davanti, 1/6 per manica + 4 raglan; 8 aumenti a giro; ~2,5 cm di catenelle sotto l'ascella; separazione maniche alla profondità dello scalfo) che crea la parte "Sprone" con i promemoria. Agio predefinito **5 cm corpo, 4 cm maniche**, sempre modificabile. Misure riempibili da taglie standard donna/uomo (`dati/taglie.json`). Dati versione 4.
+- **Prossima: fase 5** — misure personali salvate (Laura, clienti…) con guida per misurare; tipo di parte (corpo, manica, sprone, bordo); "Rifai…" in un'altra taglia, sulle misure di una persona, o stesso capo con filato diverso, con riepilogo parte per parte.
 
 Fasi:
 0. Repository GitHub `diario-uncinetto` (pubblica) e GitHub Pages.

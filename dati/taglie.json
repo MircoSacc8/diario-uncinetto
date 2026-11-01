@@ -1,0 +1,35 @@
+{
+  "fonte": "Craft Yarn Council, tabelle standard per capi a maglia e uncinetto (cm). Donna: valori della tabella; uomo: valore medio degli intervalli. Lo scollo non è nelle tabelle: è una stima (donna 44 cm per la XS, uomo 48 cm per la S, +2 cm a taglia).",
+  "misure": {
+    "seno": "Giro seno / torace",
+    "vita": "Giro vita",
+    "fianchi": "Giro fianchi",
+    "braccio": "Giro braccio",
+    "scalfo": "Profondità scalfo",
+    "manica": "Lunghezza manica fino all'ascella",
+    "schiena": "Lunghezza schiena fino alla vita",
+    "spalle": "Larghezza spalle (dietro)",
+    "scollo": "Giro scollo (stima)"
+  },
+  "donna": {
+    "XS": { "seno": 76,  "vita": 61,    "fianchi": 86,    "braccio": 25,   "scalfo": 16.5,  "manica": 42,   "schiena": 42,   "spalle": 37,   "scollo": 44 },
+    "S":  { "seno": 86,  "vita": 67.5,  "fianchi": 91.5,  "braccio": 26,   "scalfo": 17.75, "manica": 43,   "schiena": 43,   "spalle": 38,   "scollo": 46 },
+    "M":  { "seno": 96.5,"vita": 76,    "fianchi": 101.5, "braccio": 28,   "scalfo": 19,    "manica": 43,   "schiena": 43.5, "spalle": 40.5, "scollo": 48 },
+    "L":  { "seno": 106.5,"vita": 86.5, "fianchi": 111.5, "braccio": 30.5, "scalfo": 20.25, "manica": 44.5, "schiena": 44.5, "spalle": 43,   "scollo": 50 },
+    "XL": { "seno": 117, "vita": 96.5,  "fianchi": 122,   "braccio": 34.5, "scalfo": 21.5,  "manica": 44.5, "schiena": 45,   "spalle": 44.5, "scollo": 52 },
+    "2XL":{ "seno": 127, "vita": 106.5, "fianchi": 134.5, "braccio": 39.5, "scalfo": 22.75, "manica": 45.5, "schiena": 45.5, "spalle": 45.5, "scollo": 54 },
+    "3XL":{ "seno": 137, "vita": 114,   "fianchi": 139.5, "braccio": 43,   "scalfo": 24.25, "manica": 45.5, "schiena": 45.5, "spalle": 45.5, "scollo": 56 },
+    "4XL":{ "seno": 147, "vita": 119,   "fianchi": 144.5, "braccio": 47,   "scalfo": 25.5,  "manica": 47,   "schiena": 47,   "spalle": 47,   "scollo": 58 },
+    "5XL":{ "seno": 158, "vita": 127,   "fianchi": 157,   "braccio": 49.5, "scalfo": 26.75, "manica": 47,   "schiena": 47,   "spalle": 47,   "scollo": 60 }
+  },
+  "uomo": {
+    "S":  { "seno": 89,  "vita": 73.5,  "fianchi": 91.5,  "braccio": 30.5, "scalfo": 22.25, "manica": 45.5, "schiena": 59.75,"spalle": 40,    "scollo": 48 },
+    "M":  { "seno": 99,  "vita": 84,    "fianchi": 101.5, "braccio": 33,   "scalfo": 23.5,  "manica": 47,   "schiena": 64.75,"spalle": 42.5,  "scollo": 50 },
+    "L":  { "seno": 109, "vita": 94,    "fianchi": 111.5, "braccio": 38,   "scalfo": 24.75, "manica": 49.5, "schiena": 67.25,"spalle": 45,    "scollo": 52 },
+    "XL": { "seno": 119.25,"vita": 109.25,"fianchi": 121.75,"braccio": 39.5,"scalfo": 25.75,"manica": 50.5, "schiena": 71,   "spalle": 46.25, "scollo": 54 },
+    "2XL":{ "seno": 129.5,"vita": 119.5,"fianchi": 131.5, "braccio": 42,   "scalfo": 28,    "manica": 52,   "schiena": 73.5, "spalle": 49.5,  "scollo": 56 },
+    "3XL":{ "seno": 139.5,"vita": 129.5,"fianchi": 139.5, "braccio": 44.5, "scalfo": 29,    "manica": 52,   "schiena": 76,   "spalle": 49.5,  "scollo": 58 },
+    "4XL":{ "seno": 149.75,"vita": 139.5,"fianchi": 144.75,"braccio": 47,  "scalfo": 30.5,  "manica": 49.5, "schiena": 76,   "spalle": 52.75, "scollo": 60 },
+    "5XL":{ "seno": 160, "vita": 150,   "fianchi": 150,   "braccio": 48,   "scalfo": 32,    "manica": 54,   "schiena": 79,   "spalle": 56.5,  "scollo": 62 }
+  }
+}

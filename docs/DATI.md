@@ -1,4 +1,4 @@
-# Formato dei dati (versione dati 3)
+# Formato dei dati (versione dati 4)
 
 Salvati nel telefono, chiave `diario-uncinetto` di localStorage.
 
@@ -28,6 +28,8 @@ stato
 | parts[], active | parti del capo e id della parte aperta |
 | foto[] | `{ id, tipo: "ispirazione" \| "finito", didascalia, aggiunta }` (le immagini stanno a parte, vedi sotto) |
 | ispirazioneLink | link alla fonte d'ispirazione ("" se nessuno) |
+| direzione | "basso" (dal basso in alto) oppure "alto" (dal collo) |
+| sprone | null oppure `{ misure, risultato }` dell'ultimo calcolo dello sprone raglan (`js/calcoli/raglan.js`) |
 | created, updated | date (ms) |
 
 ## Parte

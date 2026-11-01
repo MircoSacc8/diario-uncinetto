@@ -19,8 +19,10 @@ import * as campioni from "./componenti/campioni.js";
 import * as misura from "./componenti/misura.js";
 import * as uncinetto from "./componenti/uncinetto.js";
 import * as foto from "./componenti/foto.js";
+import * as topdown from "./componenti/topdown.js";
+import * as sorgenti from "./componenti/sorgenti-misure.js";
 
-const moduli = [account, schermataAccesso, home, scheda, impostazioni, finestre, parti, contagiri, promemoria, timer, convertitore, contatori, punti, filati, campioni, misura, foto];
+const moduli = [account, schermataAccesso, home, scheda, impostazioni, finestre, parti, contagiri, promemoria, timer, convertitore, contatori, punti, filati, campioni, misura, foto, topdown];
 const azioni = Object.assign({}, ...moduli.map((m) => m.azioni || {}));
 const suInput = Object.assign({}, ...moduli.map((m) => m.input || {}));
 const suCambio = Object.assign({}, ...moduli.map((m) => m.cambio || {}));
@@ -80,7 +82,7 @@ async function inizia() {
   finestre.collega();
   quandoCambia(mostra);
   quandoCambia(schermoAcceso);
-  await Promise.all([punti.caricaElenco(), uncinetto.caricaElenco()]);
+  await Promise.all([punti.caricaElenco(), uncinetto.caricaElenco(), sorgenti.caricaTaglie()]);
   timer.avviaTicchettio();
   pwa.quandoAggiornamento(disegna);
   pwa.registra();

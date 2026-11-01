@@ -13,6 +13,7 @@ import * as punti from "../componenti/punti.js";
 import * as filati from "../componenti/filati.js";
 import * as campioni from "../componenti/campioni.js";
 import * as foto from "../componenti/foto.js";
+import * as topdown from "../componenti/topdown.js";
 import * as uncinetto from "../componenti/uncinetto.js";
 import { uncinettoTesto, campioneTesto } from "../calcoli/misure.js";
 
@@ -27,6 +28,7 @@ export function html(p) {
       <div><div class="eyebrow">${sopra}</div><h1>${esc(p.name)}</h1></div>
       <button class="btn ghost piccolo" data-a="progetto-modifica">Modifica</button>
     </div>
+    ${topdown.html(p)}
     ${parti.html(p, a)}
     ${contagiri.html(p, a)}
     ${promemoria.html(a)}
@@ -51,12 +53,19 @@ export function html(p) {
 export function moduloProgetto(p) {
   apri(`<h2>${p ? "Modifica progetto" : "Nuovo progetto"}</h2>
     <label for="pr-nome">Nome<input id="pr-nome" name="name" required value="${esc(p?.name)}" placeholder="Es. Borsa a rete"></label>
+    <fieldset class="scelta"><legend>Come lo lavori</legend>
+      <div class="segmenti">
+        <label><input type="radio" name="direzione" value="basso" ${p?.direzione !== "alto" ? "checked" : ""}><span>Dal basso in alto</span></label>
+        <label><input type="radio" name="direzione" value="alto" ${p?.direzione === "alto" ? "checked" : ""}><span>Dall'alto (dal collo)</span></label>
+      </div>
+      <div class="hint">Dal basso: catenelle = larghezza, giri = lunghezza. Dall'alto: l'app calcola lo sprone raglan con gli aumenti.</div>
+    </fieldset>
     ${uncinetto.campi("pr-unc", p?.uncinetto)}
     <div class="hint">Il campione (maglie e giri in 10 cm) si aggiunge nella sezione Campioni del progetto.</div>
     <label for="pr-schema">Schema / riferimento<input id="pr-schema" name="pattern" value="${esc(p?.pattern)}" placeholder="Nome dello schema o link"></label>
     ${pulsanti(p ? "Salva" : "Crea")}`,
   (d) => {
-    const valori = { name: d.get("name").trim(), uncinetto: uncinetto.leggi(d, "pr-unc"), pattern: d.get("pattern").trim(), updated: ora() };
+    const valori = { name: d.get("name").trim(), direzione: d.get("direzione") === "alto" ? "alto" : "basso", uncinetto: uncinetto.leggi(d, "pr-unc"), pattern: d.get("pattern").trim(), updated: ora() };
     if (p) Object.assign(p, valori);
     else { const n = nuovoProgetto(valori); S.dati.projects.push(n); S.vista.id = n.id; }
   });

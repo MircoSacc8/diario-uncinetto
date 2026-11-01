@@ -1,6 +1,6 @@
 // Service worker: fa funzionare l'app anche senza internet.
 // A OGNI RILASCIO aumenta VERSIONE (uguale a js/versione.js) e, se aggiungi file, mettili in FILE.
-const VERSIONE = "1.6.0";
+const VERSIONE = "1.7.0";
 const CACHE = `uncinetto-${VERSIONE}`;
 const CACHE_FONT = "uncinetto-font";
 const CACHE_FIREBASE = "uncinetto-firebase";
@@ -18,12 +18,14 @@ const FILE = [
   "css/componenti.css",
   "dati/punti.json",
   "dati/uncinetti.json",
+  "dati/taglie.json",
   "js/main.js",
   "js/versione.js",
   "js/utils/formato.js",
   "js/calcoli/campione.js",
   "js/calcoli/unione.js",
   "js/calcoli/misure.js",
+  "js/calcoli/raglan.js",
   "js/dati/modelli.js",
   "js/dati/migrazioni.js",
   "js/dati/esempi.js",
@@ -47,6 +49,8 @@ const FILE = [
   "js/componenti/foto.js",
   "js/foto/comprimi.js",
   "js/foto/archivio.js",
+  "js/componenti/topdown.js",
+  "js/componenti/sorgenti-misure.js",
   "js/schermate/home.js",
   "js/schermate/progetto.js",
   "js/schermate/impostazioni.js",

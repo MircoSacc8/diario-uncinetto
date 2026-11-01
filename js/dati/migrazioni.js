@@ -3,7 +3,7 @@
 import { uid } from "../utils/formato.js";
 import { nuovaParte, nuovaNota, nuovoUncinetto, nuovoCampione } from "./modelli.js";
 
-export const VERSIONE_DATI = 3;
+export const VERSIONE_DATI = 4;
 
 // Primo numero in un testo: "5,5" → 5.5, "5 poi 6" → 5. Nessun numero → null
 export function primoNumero(testo) {
@@ -23,6 +23,9 @@ export function normalizzaProgetto(p) {
   // Versione 3: foto (solo id, tipo e didascalia; le immagini stanno in js/foto/archivio.js)
   p.foto = Array.isArray(p.foto) ? p.foto : [];
   p.ispirazioneLink ??= "";
+  // Versione 4: direzione di lavoro ("basso" = dal basso in alto, "alto" = dal collo) e calcolo dello sprone
+  p.direzione = p.direzione === "alto" ? "alto" : "basso";
+  p.sprone ??= null;
 
   // Versione 0: prima delle "parti" giri e promemoria stavano nel progetto
   if (!Array.isArray(p.parts) || !p.parts.length) {

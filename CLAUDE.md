@@ -19,6 +19,7 @@ Leggi prima `docs/ISTRUZIONI.md` (obiettivo, decisioni, piano a fasi, regole di 
 - `js/schermate/` → `home.js` (lista) e `progetto.js` (scheda), che compongono i componenti.
 - `dati/` → elenchi in JSON (`punti.json`, `uncinetti.json`; poi taglie).
 - Calcoli di cm, giri e catenelle: `js/calcoli/misure.js` (la misura col metro vince sul campione).
+- Sprone raglan dall'alto: `js/calcoli/raglan.js` (agio predefinito 5 cm corpo, 4 maniche: sempre modificabile). Taglie standard in `dati/taglie.json` (donna e uomo, Craft Yarn Council; lo scollo è una stima).
 
 ## Convenzioni
 - Dopo ogni modifica ai dati chiama `aggiorna()` (salva e ridisegna).
