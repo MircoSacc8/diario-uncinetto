@@ -87,6 +87,7 @@ Repository: `MircoSacc8/diario-uncinetto` (pubblica, per GitHub Pages gratuito).
 ## Stato avanzamento
 - **Fase 0** (1 nov 2026): repository creata con README; app GitHub di Claude installata solo su `diario-uncinetto` (Claude può caricare i file).
 - **Fase 1** (1 nov 2026, v1.0): app divisa in cartelle, solo mobile, barra fissa "+1 giro" in basso, test automatici, GitHub Pages attivo. Dati solo sul telefono fino alla fase 2.
+- Nota: GitHub Pages tiene in cache i file per circa 10 minuti, quindi dopo un aggiornamento il telefono può vedere la versione vecchia per qualche minuto. Nella fase 2 il service worker gestirà gli aggiornamenti.
 - **Prossima: fase 2** — installazione sulla Home (PWA), accesso con Google e copia su Firebase, Esporta/Importa.
 
 Fasi:

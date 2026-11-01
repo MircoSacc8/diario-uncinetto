@@ -7,3 +7,4 @@
 - Funzioni come la versione precedente: parti, contagiri, promemoria per intervallo di giri, timer, maglie, contatori extra, punti, filati, convertitore cm ↔ giri.
 - Dati salvati sul telefono. Al primo avvio è caricato il Cardigan Laura.
 - Test automatici per conversioni e aggiornamento dei dati.
+- Corretti: finestre nascoste che velavano lo schermo, parte attiva non visibile nella fila delle parti.
