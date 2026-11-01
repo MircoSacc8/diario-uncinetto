@@ -24,6 +24,11 @@ Leggi prima `docs/ISTRUZIONI.md` (obiettivo, decisioni, piano a fasi, regole di 
 - Formato dati in `docs/DATI.md`. Se cambi il formato: aumenta `VERSIONE_DATI` in `js/dati/migrazioni.js` e aggiungi la migrazione con il suo test. I dati di Laura non vanno mai persi.
 - Niente librerie esterne senza motivo; niente build.
 
+## Dove sta il codice
+- GitHub: `MircoSacc8/diario-uncinetto` (branch `main`).
+- PC di Mircuz: `C:\Users\mirco\Desktop\WebApp\Diario_Uncinetto` (stessa repository).
+- Flusso: modifica → `npm test` → commit e push dalla copia di Claude → `git pull` nella cartella del PC, così resta sempre allineata.
+
 ## Test e pubblicazione
 - Test: `npm test` (Node 20+, nessuna installazione).
 - Pubblicazione: GitHub Pages dal branch `main`, cartella principale. Ogni fase chiusa ha un tag (`v1.0`, `v1.1`…).
