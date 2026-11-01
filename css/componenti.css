@@ -1,0 +1,118 @@
+/* Pulsanti, schede e componenti. Una sezione per componente. */
+
+/* ---- Pulsanti ---- */
+.btn { background: var(--accent); color: var(--accent-ink); min-height: var(--tocco); padding: 0 20px; border-radius: 999px; font-weight: 600; }
+.btn.ghost { background: var(--accent-soft); color: var(--ink); }
+.btn.piccolo { min-height: 40px; padding: 0 14px; font-size: .9rem; }
+.link { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; min-height: 40px; }
+.pericolo { color: var(--warn); font-size: .9rem; text-decoration: underline; min-height: 40px; }
+.tondo { width: var(--tocco); height: var(--tocco); border-radius: 50%; background: var(--accent-soft); font-size: 1.3rem; font-weight: 700; }
+.tondo:active, .btn:active, .piu:active, .meno:active { transform: scale(.96); }
+
+/* ---- Schede ---- */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.card-h { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+
+/* ---- Home: filtri e lista progetti ---- */
+.sync { font-size: .8rem; color: var(--muted); }
+.filtri { display: flex; gap: 6px; }
+.filtro { min-height: 40px; padding: 0 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: .9rem; }
+.filtro[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.lista { display: flex; flex-direction: column; gap: 10px; }
+.proj { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; text-align: left; width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; }
+.proj .nome { font-family: var(--display); font-weight: 700; font-size: 1.1rem; min-width: 0; overflow-wrap: anywhere; }
+.proj .meta { color: var(--muted); font-size: .88rem; grid-column: 1; min-width: 0; }
+.proj .conta { grid-row: 1 / 3; grid-column: 2; font-family: var(--display); font-weight: 800; font-size: 1.8rem; font-variant-numeric: tabular-nums; text-align: right; line-height: 1; }
+.proj .conta small { display: block; font-family: var(--body); font-size: .7rem; font-weight: 500; color: var(--muted); letter-spacing: .05em; text-transform: uppercase; }
+.barretta { display: block; grid-column: 1 / -1; height: 5px; background: var(--line); border-radius: 4px; overflow: hidden; margin-top: 6px; }
+.barretta i { display: block; height: 100%; background: var(--accent); }
+.tag { display: inline-block; font-size: .72rem; padding: 2px 8px; border-radius: 999px; background: var(--mint); color: var(--mint-ink); font-weight: 600; margin-left: 6px; vertical-align: middle; font-family: var(--body); }
+
+/* ---- Parti del progetto ---- */
+.parti { display: flex; gap: 8px; overflow-x: auto; margin-inline: calc(-1 * max(16px, var(--sicuro-sx))) calc(-1 * max(16px, var(--sicuro-dx))); padding: 2px max(16px, var(--sicuro-dx)) 4px max(16px, var(--sicuro-sx)); scrollbar-width: none; scroll-snap-type: x proximity; }
+.parti::-webkit-scrollbar { display: none; }
+.parte { flex: 0 0 auto; scroll-snap-align: start; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 120px; min-height: 64px; padding: 10px 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); text-align: left; }
+.parte b { font-weight: 600; font-size: .92rem; white-space: nowrap; }
+.parte span { font-family: var(--display); font-weight: 700; font-variant-numeric: tabular-nums; font-size: 1.05rem; }
+.parte span small { font-family: var(--body); font-weight: 500; color: var(--muted); font-size: .78rem; }
+.parte .mini { width: 100%; height: 3px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.parte .mini i { display: block; height: 100%; background: var(--accent); }
+.parte[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); background: var(--accent-soft); }
+.parte.aggiungi { justify-content: center; align-items: center; min-width: 88px; color: var(--muted); border-style: dashed; font-weight: 600; }
+
+/* ---- Contagiri ---- */
+.contagiri { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.contagiri .testa { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; width: 100%; }
+.contagiri .testa .link { flex: 0 0 auto; font-size: .88rem; }
+.contagiri .info { color: var(--muted); font-size: .88rem; width: 100%; margin-top: -6px; }
+.numero { font-family: var(--display); font-weight: 800; font-size: clamp(5.5rem, 30vw, 8rem); line-height: .9; font-variant-numeric: tabular-nums; letter-spacing: -.04em; user-select: none; -webkit-user-select: none; }
+.numero.salto { animation: salto .18s ease-out; }
+@keyframes salto { 50% { transform: scale(1.06); } }
+.di { color: var(--muted); font-size: .95rem; text-align: center; }
+.sotto { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 10px; width: 100%; border-top: 1px solid var(--line); padding-top: 12px; }
+.sotto .etichetta { font-weight: 600; }
+.sotto .n { font-family: var(--display); font-weight: 800; font-size: 1.7rem; font-variant-numeric: tabular-nums; text-align: center; }
+.collegamenti { display: flex; gap: 4px 16px; flex-wrap: wrap; justify-content: center; font-size: .88rem; }
+
+/* Barra fissa in basso: −  e  +1 giro, comoda per il pollice */
+.barra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 15; display: grid; grid-template-columns: 76px 1fr; gap: 10px;
+  padding: 10px max(16px, var(--sicuro-dx)) calc(10px + var(--sicuro-giu)) max(16px, var(--sicuro-sx));
+  background: var(--surface); border-top: 1px solid var(--line); }
+.piu { background: var(--accent); color: var(--accent-ink); border-radius: 18px; font-family: var(--display); font-size: 1.4rem; font-weight: 700; height: 64px; user-select: none; -webkit-user-select: none; }
+.meno { background: var(--accent-soft); border-radius: 18px; font-size: 1.8rem; font-weight: 700; height: 64px; }
+
+/* ---- Promemoria ---- */
+.promemoria-ora { background: var(--mint); color: var(--mint-ink); border-radius: 14px; padding: 10px 14px; font-weight: 600; width: 100%; display: flex; flex-direction: column; gap: 2px; }
+.promemoria-ora small { font-weight: 500; opacity: .85; }
+.registro { display: flex; flex-direction: column; gap: 2px; font-size: .92rem; }
+.registro button { display: grid; grid-template-columns: 84px 1fr; gap: 10px; text-align: left; padding: 10px 8px; border-radius: 10px; min-height: var(--tocco); }
+.registro b { font-family: var(--display); font-variant-numeric: tabular-nums; }
+.registro .ora { background: var(--mint); color: var(--mint-ink); }
+.registro .passato { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line); }
+
+/* ---- Timer ---- */
+.timer { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; width: 100%; border-top: 1px solid var(--line); padding-top: 12px; }
+.timer .tempo { font-family: var(--display); font-weight: 800; font-size: 1.7rem; font-variant-numeric: tabular-nums; }
+.timer .nota { color: var(--muted); font-size: .85rem; }
+.acceso { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--live); margin-right: 6px; vertical-align: middle; animation: pulsa 1.4s ease-in-out infinite; }
+@keyframes pulsa { 50% { opacity: .3; } }
+
+/* ---- Convertitore cm / giri ---- */
+.calcolo { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: end; }
+.calcolo .uguale { padding-bottom: 14px; color: var(--muted); font-weight: 600; }
+
+/* ---- Contatori extra ---- */
+.contatore { display: grid; grid-template-columns: 1fr auto auto auto; gap: 10px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.contatore:last-child { border-bottom: 0; }
+.contatore .nome { min-width: 0; overflow-wrap: anywhere; font-weight: 600; text-align: left; min-height: var(--tocco); }
+.contatore .n { font-family: var(--display); font-weight: 800; font-size: 1.5rem; font-variant-numeric: tabular-nums; min-width: 2ch; text-align: center; }
+
+/* ---- Punti ---- */
+.chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.chip { border: 1px solid var(--line); border-radius: 999px; padding: 0 12px; min-height: 40px; font-size: .88rem; background: var(--bg); }
+.chip b { font-family: var(--display); }
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+/* ---- Filati ---- */
+.filato { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.pallino { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--line); }
+.filato .t { min-width: 0; overflow-wrap: anywhere; }
+.filato .t strong { display: block; }
+.filato .t span { color: var(--muted); font-size: .85rem; }
+.filato .g { font-variant-numeric: tabular-nums; font-weight: 600; min-height: var(--tocco); }
+.totale { text-align: right; color: var(--muted); font-size: .9rem; }
+
+/* ---- Interruttore ---- */
+.interruttore { flex-direction: row; justify-content: space-between; align-items: center; gap: 10px; font-size: .9rem; min-height: var(--tocco); }
+.interruttore input { width: 24px; min-height: 24px; height: 24px; }
+
+/* ---- Finestre dal basso (moduli e conferme) ---- */
+.finestra { position: fixed; inset: 0; background: var(--velo); display: flex; align-items: flex-end; z-index: 20; }
+.finestra > form { background: var(--surface); width: 100%; border-radius: 22px 22px 0 0; display: flex; flex-direction: column; gap: 12px;
+  padding: 20px max(18px, var(--sicuro-dx)) calc(20px + var(--sicuro-giu)) max(18px, var(--sicuro-sx)); max-height: 88dvh; overflow: auto; }
+.azioni { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; align-items: center; }
+.azioni .pericolo { margin-right: auto; }
+
+/* ---- Avviso temporaneo ---- */
+.avviso { position: fixed; left: 16px; right: 16px; bottom: calc(var(--barra-h) + 16px + var(--sicuro-giu)); margin: 0 auto; width: fit-content; max-width: calc(100% - 32px);
+  background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 999px; font-size: .9rem; z-index: 30; text-align: center; }

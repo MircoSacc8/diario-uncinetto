@@ -1,0 +1,14 @@
+[
+  { "sigla": "cat", "nome": "catenella" },
+  { "sigla": "mbss", "nome": "maglia bassissima" },
+  { "sigla": "mb", "nome": "maglia bassa" },
+  { "sigla": "mma", "nome": "mezza maglia alta" },
+  { "sigla": "ma", "nome": "maglia alta" },
+  { "sigla": "mad", "nome": "maglia alta doppia" },
+  { "sigla": "ma ril", "nome": "maglia alta a rilievo" },
+  { "sigla": "mb ril", "nome": "maglia bassa a rilievo" },
+  { "sigla": "aum", "nome": "aumento" },
+  { "sigla": "dim", "nome": "diminuzione" },
+  { "sigla": "anello", "nome": "anello magico" },
+  { "sigla": "pc", "nome": "punto pop-corn" }
+]

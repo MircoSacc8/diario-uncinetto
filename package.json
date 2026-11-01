@@ -1,0 +1,9 @@
+{
+  "name": "diario-uncinetto",
+  "private": true,
+  "type": "module",
+  "description": "Serve solo per i test automatici: l'app non ha bisogno di installare nulla.",
+  "scripts": {
+    "test": "node --test"
+  }
+}

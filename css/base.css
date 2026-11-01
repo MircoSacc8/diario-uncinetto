@@ -1,0 +1,59 @@
+/* Impaginazione generale: solo telefono, una colonna. */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;          /* niente zoom col doppio tocco */
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.45;
+  padding-top: calc(16px + var(--sicuro-su));
+  padding-bottom: calc(40px + var(--sicuro-giu));
+  padding-left: max(16px, var(--sicuro-sx));
+  padding-right: max(16px, var(--sicuro-dx));
+  overflow-x: hidden;
+}
+
+/* Nella scheda progetto c'è la barra fissa in basso */
+body.con-barra { padding-bottom: calc(var(--barra-h) + 24px + var(--sicuro-giu)); }
+body.bloccato { overflow: hidden; }
+
+.wrap { display: flex; flex-direction: column; gap: 18px; }
+
+h1, h2 { font-family: var(--display); margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+h1 { font-size: 1.85rem; font-weight: 800; overflow-wrap: anywhere; }
+h2 { font-size: 1.2rem; font-weight: 700; overflow-wrap: anywhere; }
+
+.eyebrow { font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); font-weight: 600; }
+.hint { font-size: .82rem; color: var(--muted); }
+.vuoto { text-align: center; color: var(--muted); padding: 30px 10px; border: 1.5px dashed var(--line); border-radius: 16px; }
+.testo-muto { color: var(--muted); }
+
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; padding: 0; touch-action: manipulation; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 10px; }
+
+.top { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+.top > div { min-width: 0; }
+
+label { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; color: var(--muted); font-weight: 500; min-width: 0; }
+input, textarea {
+  background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
+  padding: 12px; color: var(--ink); width: 100%;
+  font-size: 16px;                    /* sotto i 16px iOS fa lo zoom sul campo */
+  min-height: var(--tocco);
+}
+textarea { min-height: 110px; resize: vertical; }
+.griglia2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

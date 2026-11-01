@@ -1,0 +1,47 @@
+/* Colori e font. Ogni colore è un "token": i componenti usano solo questi. */
+:root {
+  --bg: #f3f1f6;
+  --surface: #ffffff;
+  --ink: #2a2233;
+  --muted: #776e82;
+  --line: #e2dde9;
+  --accent: #7a3e74;
+  --accent-ink: #ffffff;
+  --accent-soft: #f1e3ef;
+  --mint: #d9ede4;
+  --mint-ink: #1f5a45;
+  --warn: #b4234a;
+  --live: #2e9d6b;
+  --velo: rgb(20 12 24 / .45);
+
+  --display: "Bricolage Grotesque", ui-rounded, system-ui, sans-serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --tocco: 48px;          /* misura minima dei pulsanti */
+  --barra-h: 84px;        /* altezza della barra +1 giro in basso */
+  --sicuro-su: env(safe-area-inset-top, 0px);
+  --sicuro-giu: env(safe-area-inset-bottom, 0px);
+  --sicuro-sx: env(safe-area-inset-left, 0px);
+  --sicuro-dx: env(safe-area-inset-right, 0px);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #18141c;
+    --surface: #231d29;
+    --ink: #efe9f3;
+    --muted: #a69cb1;
+    --line: #352d3d;
+    --accent: #d59bce;
+    --accent-ink: #24121f;
+    --accent-soft: #3a2537;
+    --mint: #1d3a2f;
+    --mint-ink: #a9e0c8;
+    --warn: #ff8fa8;
+    --live: #4fc58f;
+    --velo: rgb(0 0 0 / .6);
+    color-scheme: dark;
+  }
+}
