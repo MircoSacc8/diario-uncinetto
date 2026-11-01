@@ -40,7 +40,7 @@ export function html() {
       <button class="btn" data-a="aggiorna-app">Aggiorna l'app</button></section>` : ""}
     ${istruzioniHome()}
     <section class="card"><h2>Account</h2>
-      ${settings.email ? `<p>Account Google: <b>${esc(settings.email)}</b></p>` : "<p>Nessun account collegato.</p>"}
+      ${settings.email ? `<p>Account: <b>${esc(settings.email)}</b></p>` : "<p>Nessun account collegato.</p>"}
       <p class="hint" id="stato-sync">${testoStato()}</p>
       ${settings.uid ? `<button class="btn ghost" data-a="esci-chiedi">Esci dall'account</button>` : ""}
     </section>

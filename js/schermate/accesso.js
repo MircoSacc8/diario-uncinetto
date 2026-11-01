@@ -1,5 +1,6 @@
 // Schermata di accesso: obbligatoria al primo avvio, così i progetti sono sempre salvati online.
-// Due modi: Google (finestra di Google) oppure email e password (nessuna finestra).
+// Si entra con email e password (nessuna finestra da aprire: funziona sempre anche dall'app sulla Home).
+// L'accesso con Google è stato tolto su richiesta di Mircuz: il codice resta in js/firebase/accesso.js.
 import { esc } from "../utils/formato.js";
 
 const stato = { messaggio: "", conferma: "", inCorso: false, email: "", password: "" };
@@ -17,9 +18,7 @@ export function html() {
   return `<section class="accesso">
     ${icona}
     <div><div class="eyebrow">Benvenuta</div><h1>Diario dell'Uncinetto</h1></div>
-    <p>Accedi: i progetti vengono salvati online e li ritrovi anche se cambi telefono.</p>
-    <button class="btn" data-a="accedi" ${dis}>Accedi con Google</button>
-    <div class="oppure"><span>oppure con email</span></div>
+    <p>Entra con la tua email: i progetti vengono salvati online e li ritrovi anche se cambi telefono. La prima volta tocca “Crea account”.</p>
     <form class="accesso-modulo" id="modulo-accesso" novalidate>
       <label for="acc-email">Email<input id="acc-email" type="email" autocomplete="username" inputmode="email" autocapitalize="off" value="${esc(stato.email)}" placeholder="nome@esempio.it"></label>
       <label for="acc-password">Password<input id="acc-password" type="password" autocomplete="current-password" value="${esc(stato.password)}" placeholder="almeno 6 caratteri"></label>
@@ -31,7 +30,7 @@ export function html() {
     </form>
     ${stato.messaggio ? `<p class="attenzione" role="alert">${esc(stato.messaggio)}</p>` : ""}
     ${stato.conferma ? `<p class="conferma" role="status">${esc(stato.conferma)}</p>` : ""}
-    <p class="hint">Entra sempre nello stesso modo, così ritrovi i tuoi progetti. Ognuno vede solo i propri.</p>
+    <p class="hint">Ognuno vede solo i propri progetti.</p>
   </section>`;
 }
 

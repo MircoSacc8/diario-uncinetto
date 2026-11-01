@@ -1,5 +1,8 @@
 # Novità
 
+## v1.8.1 — 1 novembre 2026
+- Tolto "Accedi con Google" dalla schermata di accesso (deciso da Mircuz): si entra solo con email e password, che funziona sempre anche dall'app sulla Home.
+
 ## v1.8 — 1 novembre 2026 (fase 5)
 - **Misure delle persone** (Impostazioni → Misure delle persone): seno, vita, fianchi, braccio, scalfo, manica, schiena, spalle, scollo, ognuna con la spiegazione di come prenderla. Le misure mancanti si prendono dalla taglia standard più vicina. Sono salvate online e le vede solo chi le ha inserite.
 - Ogni parte ha un **tipo** (corpo dietro/davanti, manica, sprone, bordo, altro), indovinato dal nome e modificabile.

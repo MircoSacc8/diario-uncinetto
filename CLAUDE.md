@@ -42,7 +42,7 @@ Leggi prima `docs/ISTRUZIONI.md` (obiettivo, decisioni, piano a fasi, regole di 
 - Codice in `js/firebase/`: `config.js` (dati pubblici), `sdk.js` (versione fissa da gstatic), `accesso.js` (Google), `sincronizza.js` (copia online), `account.js` (collega tutto all'app).
 - Regole in `firestore.rules`: se cambiano, vanno ripubblicate anche nella console Firebase.
 - Il telefono resta la copia principale; online è la copia di sicurezza e il passaggio tra telefoni.
-- Accesso: Google (popup) **e** email/password, entrambi attivi in Firebase. Stessa email Gmail = stesso account.
+- Accesso: solo **email e password** nella schermata (Google tolto da v1.8.1 su richiesta di Mircuz; resta attivo in Firebase e il codice `entra()` in `js/firebase/accesso.js` non è usato).
 - La chiave web in `config.js` è pubblica per natura; in Google Cloud è limitata ai domini `mircosacc8.github.io/*` e `diario-uncinetto-c2c4e.firebaseapp.com/*` e a 25 API. Se l'app cambia indirizzo, aggiorna la limitazione e i domini autorizzati di Firebase Authentication. L'avviso "secret detected" di GitHub su questa chiave è atteso.
 
 ## Test e pubblicazione

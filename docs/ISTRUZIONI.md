@@ -98,6 +98,7 @@ Repository: `MircoSacc8/diario-uncinetto` (pubblica, per GitHub Pages gratuito).
 - **Fase 3b** (1 nov 2026, v1.6): foto di ispirazione e del lavoro finito (max 6 per gruppo), didascalia, link alla fonte, miniatura nella lista; foto compresse salvate su telefono (IndexedDB) e online in Firestore `utenti/{uid}/foto/{id}`; incluse nel backup. Dati versione 3.
 - **Fase 4** (1 nov 2026, v1.7): direzione di lavoro per progetto (dal basso / dall'alto). Calcolatore sprone raglan top-down (avvio, divisione 1/3 dietro, 1/3 davanti, 1/6 per manica + 4 raglan; 8 aumenti a giro; ~2,5 cm di catenelle sotto l'ascella; separazione maniche alla profondità dello scalfo) che crea la parte "Sprone" con i promemoria. Agio predefinito **5 cm corpo, 4 cm maniche**, sempre modificabile. Misure riempibili da taglie standard donna/uomo (`dati/taglie.json`). Dati versione 4.
 - **Fase 5** (1 nov 2026, v1.8): misure delle persone salvate (anche clienti) con guida per misurare e taglia di riferimento per le misure mancanti, sincronizzate online (`utenti/{uid}/impostazioni/persone`); tipo di parte; "Rifai…" in altra taglia (donna/uomo), su misura o con filato diverso, con riepilogo parte per parte. Dati versione 5.
+- **v1.8.1** (1 nov 2026): tolto il pulsante "Accedi con Google" (Mircuz teme problemi su iPhone); si entra solo con email e password.
 - **Tutte le fasi del piano sono fatte.** Prossimo: raccogliere le osservazioni di Laura e correggere.
 
 Fasi:
