@@ -1,5 +1,6 @@
 /* Impaginazione generale: solo telefono, una colonna. */
 *, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }   /* finestre e avvisi nascosti restano nascosti */
 
 html {
   background: var(--bg);
