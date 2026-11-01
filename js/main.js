@@ -29,6 +29,7 @@ function mostra() {
   if (!p) S.vista.id = null;
   app.innerHTML = p ? scheda.html(p) : home.html();
   document.body.classList.toggle("con-barra", !!p);
+  if (p) parti.dopoDisegno();
 }
 
 document.addEventListener("click", (e) => {

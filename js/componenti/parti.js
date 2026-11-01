@@ -18,6 +18,14 @@ export function html(p, a) {
     <button class="parte aggiungi" data-a="parte-nuova">+ Parte</button></nav>`;
 }
 
+// Dopo ogni disegno: porta in vista la parte attiva nella fila
+export function dopoDisegno() {
+  const fila = document.querySelector(".parti");
+  const attiva = fila?.querySelector('[aria-pressed="true"]');
+  if (!attiva) return;
+  fila.scrollLeft = attiva.offsetLeft - (fila.clientWidth - attiva.offsetWidth) / 2;
+}
+
 function modulo(p, x) {
   apri(`<h2>${x ? "Modifica parte" : "Nuova parte"}</h2>
     <label for="p-nome">Nome<input id="p-nome" name="name" required value="${esc(x?.name)}" placeholder="Es. Manica dx"></label>

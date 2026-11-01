@@ -29,7 +29,7 @@
 .tag { display: inline-block; font-size: .72rem; padding: 2px 8px; border-radius: 999px; background: var(--mint); color: var(--mint-ink); font-weight: 600; margin-left: 6px; vertical-align: middle; font-family: var(--body); }
 
 /* ---- Parti del progetto ---- */
-.parti { display: flex; gap: 8px; overflow-x: auto; margin-inline: calc(-1 * max(16px, var(--sicuro-sx))) calc(-1 * max(16px, var(--sicuro-dx))); padding: 2px max(16px, var(--sicuro-dx)) 4px max(16px, var(--sicuro-sx)); scrollbar-width: none; scroll-snap-type: x proximity; }
+.parti { position: relative; display: flex; gap: 8px; overflow-x: auto; margin-inline: calc(-1 * max(16px, var(--sicuro-sx))) calc(-1 * max(16px, var(--sicuro-dx))); padding: 2px max(16px, var(--sicuro-dx)) 4px max(16px, var(--sicuro-sx)); scrollbar-width: none; scroll-snap-type: x proximity; scroll-padding-inline: max(16px, var(--sicuro-sx)) max(16px, var(--sicuro-dx)); }
 .parti::-webkit-scrollbar { display: none; }
 .parte { flex: 0 0 auto; scroll-snap-align: start; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 120px; min-height: 64px; padding: 10px 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); text-align: left; }
 .parte b { font-weight: 600; font-size: .92rem; white-space: nowrap; }
