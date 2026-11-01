@@ -5,6 +5,7 @@
 // di aumenti: 2 sul dietro, 2 sul davanti, 2 per manica) finché corpo e maniche arrivano
 // alla misura del capo finito (misura del corpo + agio). Quello che non si riesce ad aumentare
 // entro la profondità dello scalfo si aggiunge con catenelle sotto l'ascella.
+import { indovinaTipo } from "./promemoria.js";
 
 const maglie = (cm, m10) => Math.round((cm * m10) / 10);
 
@@ -69,7 +70,7 @@ export function calcolaRaglan(d) {
 
 const ogni = (passo) => (passo === 1 ? "a ogni giro" : `ogni ${passo} giri`);
 
-// Promemoria per la parte "Sprone": { r, to, t }
+// Promemoria per la parte "Sprone": { r, to, t, tipo }
 export function promemoriaRaglan(r) {
   if (r.errore) return [];
   const note = [{ r: 0, to: 0, t: `Avvio: ${r.avvio} maglie — dietro ${r.divisione.dietro}, davanti ${r.divisione.davanti}, maniche ${r.divisione.manica} + ${r.divisione.manica}, 4 maglie raglan` }];
@@ -92,5 +93,5 @@ export function promemoriaRaglan(r) {
     r: r.giriSprone, to: r.giriSprone,
     t: `Separa le maniche: lascia ${r.finale.manica} maglie per manica${r.finale.sottoAscella ? ` e fai ${r.finale.sottoAscella} catenelle sotto ogni ascella` : ""}. Corpo: ${r.finale.corpo} maglie`,
   });
-  return note;
+  return note.map((n) => ({ ...n, tipo: indovinaTipo(n.t) }));
 }

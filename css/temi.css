@@ -13,6 +13,11 @@
   --mint-ink: #4b5b41;
   --warn: #a8463a;
   --live: #6f9a63;
+  /* Tipi di promemoria: sfondo e testo */
+  --aumenti: #e6ecdf;      --aumenti-ink: #4b5b41;
+  --diminuzioni: #f3e2df;  --diminuzioni-ink: #8a4c50;
+  --colore: #ece4f1;       --colore-ink: #63507a;
+  --altro: #f4ead9;        --altro-ink: #6e5a3a;
   --velo: rgb(61 51 48 / .35);
 
   --display: "Bricolage Grotesque", ui-rounded, system-ui, sans-serif;

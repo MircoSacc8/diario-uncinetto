@@ -62,13 +62,28 @@
 .meno { background: var(--accent-soft); border-radius: 18px; font-size: 1.8rem; font-weight: 700; height: 64px; }
 
 /* ---- Promemoria ---- */
-.promemoria-ora { background: var(--mint); color: var(--mint-ink); border-radius: 14px; padding: 10px 14px; font-weight: 600; width: 100%; display: flex; flex-direction: column; gap: 2px; }
-.promemoria-ora small { font-weight: 500; opacity: .85; }
+.promemoria-ora { width: 100%; display: flex; flex-direction: column; gap: 6px; }
+.pm { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center; border-radius: 14px; padding: 10px 14px; text-align: left;
+  background: var(--tipo-bg); color: var(--tipo-ink); }
+.pm-icona { font-size: 1.3rem; line-height: 1; }
+.pm-testo { display: flex; flex-direction: column; gap: 2px; }
+.pm-testo b { font-weight: 650; }
+.pm-testo small { font-weight: 500; opacity: .85; }
+.pm.grande { padding: 16px; border-radius: 18px; }
+.pm.grande .pm-icona { font-size: 2rem; }
+.pm.grande b { font-family: var(--display); font-size: 1.35rem; line-height: 1.2; }
+.tipo-aumenti { --tipo-bg: var(--aumenti); --tipo-ink: var(--aumenti-ink); }
+.tipo-diminuzioni { --tipo-bg: var(--diminuzioni); --tipo-ink: var(--diminuzioni-ink); }
+.tipo-colore { --tipo-bg: var(--colore); --tipo-ink: var(--colore-ink); }
+.tipo-altro { --tipo-bg: var(--altro); --tipo-ink: var(--altro-ink); }
+.annuncio { display: flex; flex-direction: column; gap: 10px; }
+.btn.largo { flex: 1; min-height: 56px; font-size: 1.1rem; }
 .registro { display: flex; flex-direction: column; gap: 2px; font-size: .92rem; }
 .registro button { display: grid; grid-template-columns: 84px 1fr; gap: 10px; text-align: left; padding: 10px 8px; border-radius: 10px; min-height: var(--tocco); }
 .registro b { font-family: var(--display); font-variant-numeric: tabular-nums; }
-.registro .ora { background: var(--mint); color: var(--mint-ink); }
+.registro .ora { background: var(--tipo-bg); color: var(--tipo-ink); }
 .registro .passato { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line); }
+.segmenti.quattro { grid-template-columns: 1fr 1fr; }
 
 /* ---- Timer ---- */
 .timer { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; width: 100%; border-top: 1px solid var(--line); padding-top: 12px; }

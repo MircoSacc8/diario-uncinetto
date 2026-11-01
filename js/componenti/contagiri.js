@@ -4,7 +4,7 @@ import { esc, virgola, ora } from "../utils/formato.js";
 import { aggiorna } from "../dati/stato.js";
 import { campioneDi, uncinettoDi, cmAttuali, giriMancanti, uncinettoTesto } from "../calcoli/misure.js";
 import { conferma, chiediNumero } from "./finestre.js";
-import { riquadroAttivi, cheIniziano } from "./promemoria.js";
+import { riquadroAttivi, annuncia } from "./promemoria.js";
 import { avviso, vibra } from "./avvisi.js";
 import * as timer from "./timer.js";
 import * as misura from "./misura.js";
@@ -68,15 +68,18 @@ export const azioni = {
     const c = campioneDi(p, a);
     const primaMancavano = giriMancanti(a, c);
     a.rounds++; p.updated = ora(); aggiorna(); salto(); vibra();
-    const nuovi = cheIniziano(a);
     const { tipo, valore } = a.obiettivo;
-    if (nuovi.length) avviso("⏰ " + nuovi.map((l) => l.t).join(" · "));
-    else if (valore && primaMancavano > 0 && giriMancanti(a, c) === 0) {
+    if (annuncia(a, a.rounds - 1, a.rounds)) return;   // promemoria che iniziano o finiscono qui
+    if (valore && primaMancavano > 0 && giriMancanti(a, c) === 0) {
       avviso(tipo === "cm" ? `Dovresti essere a ${virgola(valore)} cm: misura col metro` : `${a.name}: giri finiti!`);
     }
   },
   "giro-meno": ({ p, a }) => { if (a.rounds > 0) { a.rounds--; p.updated = ora(); aggiorna(); } },
-  "giro-imposta": ({ p, a }) => chiediNumero(`Giro attuale · ${esc(a.name)}`, a.rounds, (n) => { a.rounds = n; p.updated = ora(); }),
+  "giro-imposta": ({ p, a }) => chiediNumero(`Giro attuale · ${esc(a.name)}`, a.rounds, (n) => {
+    const prima = a.rounds;
+    a.rounds = n; p.updated = ora();
+    setTimeout(() => annuncia(a, prima, n), 0);   // dopo la chiusura della finestra del numero
+  }),
   "giri-azzera": ({ a }) => conferma(`Azzerare i giri di “${esc(a.name)}”?`, "Azzera", () => { a.rounds = 0; }),
   "maglia-piu": ({ p }) => { p.stitchCount++; aggiorna(); },
   "maglia-meno": ({ p }) => { if (p.stitchCount > 0) { p.stitchCount--; aggiorna(); } },

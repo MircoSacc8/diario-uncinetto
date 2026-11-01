@@ -20,6 +20,7 @@ Leggi prima `docs/ISTRUZIONI.md` (obiettivo, decisioni, piano a fasi, regole di 
 - `dati/` → elenchi in JSON (`punti.json`, `uncinetti.json`; poi taglie).
 - Calcoli di cm, giri e catenelle: `js/calcoli/misure.js` (la misura col metro vince sul campione).
 - Sprone raglan dall'alto: `js/calcoli/raglan.js` (agio predefinito 5 cm corpo, 4 maniche: sempre modificabile). Taglie standard in `dati/taglie.json` (donna e uomo, Craft Yarn Council; lo scollo è una stima).
+- Promemoria (tipi e quando avvisare): `js/calcoli/promemoria.js`; avviso grande `annuncia()` in `js/componenti/promemoria.js`, suono `suona()` in `js/componenti/avvisi.js` (spegnibile, `settings.suono`).
 - "Rifai…" e su misura: `js/calcoli/su-misura.js` (corpo ← seno, manica ← braccio e lunghezza manica, sprone ricalcolato; l'agio scelto vale per il capo nuovo, per quello vecchio si suppone 5/4). Misure delle persone: `js/schermate/persone.js`, guida in `dati/come-misurare.json`.
 
 ## Convenzioni

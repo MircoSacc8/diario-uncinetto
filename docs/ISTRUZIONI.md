@@ -100,6 +100,7 @@ Repository: `MircoSacc8/diario-uncinetto` (pubblica, per GitHub Pages gratuito).
 - **Fase 5** (1 nov 2026, v1.8): misure delle persone salvate (anche clienti) con guida per misurare e taglia di riferimento per le misure mancanti, sincronizzate online (`utenti/{uid}/impostazioni/persone`); tipo di parte; "Rifai…" in altra taglia (donna/uomo), su misura o con filato diverso, con riepilogo parte per parte. Dati versione 5.
 - **v1.8.1** (1 nov 2026): tolto il pulsante "Accedi con Google" (Mircuz teme problemi su iPhone); si entra solo con email e password.
 - **v1.8.2** (1 nov 2026): l'app parte senza progetti (il Cardigan Laura era solo una prova per spiegare il progetto); quello d'esempio già negli account viene tolto se mai modificato.
+- **v1.9.0** (1 nov 2026): avvisi dei promemoria migliorati — finestra grande da confermare ("Ok, fatto") quando inizia un promemoria e all'ultimo giro dell'intervallo; anche quando il giro si scrive a mano (solo andando avanti, non per intervalli già passati); suono "din" (Web Audio, spegnibile in Impostazioni; su iPhone niente vibrazione e niente suono col silenzioso); tipo di promemoria (Aumenti ➕, Diminuzioni ➖, Cambio colore 🎨, Altro 📌) con colore, indovinato dal testo per quelli già scritti. Logica in `js/calcoli/promemoria.js`. Dati versione 6 (nessun dato tolto).
 - **Tutte le fasi del piano sono fatte.** Prossimo: raccogliere le osservazioni di Laura e correggere.
 
 Fasi:

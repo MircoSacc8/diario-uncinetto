@@ -1,8 +1,8 @@
-// Schermata impostazioni: backup, installazione sulla Home, vibrazione, versione.
+// Schermata impostazioni: backup, installazione sulla Home, vibrazione e suono, versione.
 import { S, aggiorna, salva } from "../dati/stato.js";
 import { esportaFile, leggiBackupCompleto, importaNeiDati } from "../dati/backup.js";
 import * as archivio from "../foto/archivio.js";
-import { avviso } from "../componenti/avvisi.js";
+import { avviso, suona } from "../componenti/avvisi.js";
 import { suHome, suIphone, aggiornamentoPronto, applicaAggiornamento } from "../pwa/installa.js";
 import { VERSIONE_APP } from "../versione.js";
 import { esc } from "../utils/formato.js";
@@ -56,6 +56,10 @@ export function html() {
     </section>
     <section class="card"><h2>Preferenze</h2>
       <label class="interruttore" for="vibrazione">Vibrazione a ogni giro<input id="vibrazione" type="checkbox" ${settings.vibrate ? "checked" : ""}></label>
+      <p class="hint">Sull'iPhone la vibrazione non c'è: Apple non la permette alle app web.</p>
+      <label class="interruttore" for="suono">Suono con i promemoria<input id="suono" type="checkbox" ${settings.suono !== false ? "checked" : ""}></label>
+      <p class="hint">Un “din” quando inizia o finisce un promemoria. Non si sente se l'iPhone è in silenzioso.</p>
+      <button class="btn ghost piccolo" data-a="suono-prova">Prova il suono</button>
     </section>
     <p class="hint">Versione ${VERSIONE_APP}</p>`;
 }
@@ -72,12 +76,14 @@ export const azioni = {
     avviso("Backup pronto");
   },
   "aggiorna-app": () => applicaAggiornamento(),
+  "suono-prova": () => suona(true),
   "esci-chiedi": () => conferma("Uscire dall'account? I progetti restano salvati online e li ritrovi quando rientri.", "Esci",
     () => { azioniAccount.esci(); }),
 };
 
 export const cambio = {
   "vibrazione": (el) => { S.dati.settings.vibrate = el.checked; salva(); },
+  "suono": (el) => { S.dati.settings.suono = el.checked; salva(); if (el.checked) suona(true); },
   "backup-file": async (el) => {
     const file = el.files?.[0];
     el.value = "";

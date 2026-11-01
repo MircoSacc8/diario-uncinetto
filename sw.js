@@ -1,6 +1,6 @@
 // Service worker: fa funzionare l'app anche senza internet.
 // A OGNI RILASCIO aumenta VERSIONE (uguale a js/versione.js) e, se aggiungi file, mettili in FILE.
-const VERSIONE = "1.8.2";
+const VERSIONE = "1.9.0";
 const CACHE = `uncinetto-${VERSIONE}`;
 const CACHE_FONT = "uncinetto-font";
 const CACHE_FIREBASE = "uncinetto-firebase";
@@ -28,6 +28,7 @@ const FILE = [
   "js/calcoli/misure.js",
   "js/calcoli/raglan.js",
   "js/calcoli/su-misura.js",
+  "js/calcoli/promemoria.js",
   "js/dati/modelli.js",
   "js/dati/migrazioni.js",
   "js/dati/esempi.js",

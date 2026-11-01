@@ -76,7 +76,7 @@ function risultati(p) {
       obiettivo: { tipo: "cm", valore: p.sprone.misure.scalfo },
       start: `${r.avvio} cat (scollo ${virgola(p.sprone.misure.scollo)} cm)`,
       categoria: "sprone",
-      log: note.map((n) => nuovaNota(n.r, n.to, n.t)),
+      log: note.map((n) => nuovaNota(n.r, n.to, n.t, n.tipo)),
     };
     if (esiste) Object.assign(esiste, valori);
     else { const n = nuovaParte("Sprone", valori); p.parts.unshift(n); p.active = n.id; }

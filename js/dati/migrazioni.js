@@ -3,8 +3,9 @@
 import { uid } from "../utils/formato.js";
 import { nuovaParte, nuovaNota, nuovoUncinetto, nuovoCampione } from "./modelli.js";
 import { indovinaCategoria } from "../calcoli/su-misura.js";
+import { indovinaTipo, TIPI } from "../calcoli/promemoria.js";
 
-export const VERSIONE_DATI = 5;
+export const VERSIONE_DATI = 6;
 
 // Primo numero in un testo: "5,5" → 5.5, "5 poi 6" → 5. Nessun numero → null
 export function primoNumero(testo) {
@@ -52,7 +53,10 @@ export function normalizzaProgetto(p) {
 
   p.parts.forEach((x) => {
     x.log ??= [];
-    x.log.forEach((l) => { l.id ??= uid(); l.to ??= l.r; });
+    x.log.forEach((l) => {
+      l.id ??= uid(); l.to ??= l.r;
+      if (!TIPI[l.tipo]) l.tipo = indovinaTipo(l.t);   // versione 6: tipo del promemoria
+    });
     if (!x.obiettivo || typeof x.obiettivo !== "object") x.obiettivo = { tipo: "giri", valore: +x.target || 0 };
     if (x.uncinetto === undefined) {
       x.uncinetto = x.hook ? nuovoUncinetto({ tipo: p.uncinetto.tipo, mm: primoNumero(x.hook), nota: x.hook }) : null;
@@ -85,6 +89,7 @@ export function rimuoviEsempio(s, adesso = Date.now()) {
 export function normalizzaStato(s) {
   s = s && typeof s === "object" ? s : {};
   s.settings ??= { vibrate: true };
+  s.settings.suono ??= true;   // versione 6: suono con gli avvisi dei promemoria
   s.projects = Array.isArray(s.projects) ? s.projects : [];
   s.projects.forEach(normalizzaProgetto);
   s.updatedAt ??= 0;

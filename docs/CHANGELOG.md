@@ -1,5 +1,13 @@
 # Novità
 
+## v1.9.0 — 1 novembre 2026
+- **Avviso grande dei promemoria**: quando arrivi al primo giro di un promemoria compare una finestra con il testo e il pulsante **"Ok, fatto"**, che resta finché non la tocchi.
+- **Avviso all'ultimo giro** di un intervallo (es. "Ultimo giro · Giri 18–22: due dim").
+- L'avviso compare anche quando **scrivi il giro a mano** e entri in un intervallo. Tornando indietro non compare.
+- **Suono "din"** con gli avvisi (sull'iPhone la vibrazione non c'è). Si spegne e si prova in Impostazioni → Preferenze. Col tasto silenzioso dell'iPhone non si sente.
+- **Tipo di promemoria**: Aumenti ➕, Diminuzioni ➖, Cambio colore 🎨, Altro 📌, ognuno col suo colore nel contagiri e nella lista. Per i promemoria già scritti il tipo si indovina dal testo ("dim", "aum", "colore"); si può cambiare toccandoli.
+- I progetti già iniziati restano uguali: si aggiunge solo il tipo ai promemoria (dati versione 6).
+
 ## v1.8.2 — 1 novembre 2026
 - Chi entra la prima volta parte **senza progetti**: il "Cardigan Laura" era solo un esempio e non viene più caricato.
 - Il Cardigan d'esempio già finito negli account viene tolto da solo (anche online e dagli altri telefoni), se non è mai stato modificato.

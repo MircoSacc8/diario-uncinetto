@@ -1,4 +1,4 @@
-# Formato dei dati (versione dati 5)
+# Formato dei dati (versione dati 6)
 
 Salvati nel telefono, chiave `diario-uncinetto` di localStorage.
 
@@ -6,7 +6,7 @@ Salvati nel telefono, chiave `diario-uncinetto` di localStorage.
 stato
 ├─ versione        numero del formato (vedi js/dati/migrazioni.js)
 ├─ updatedAt       ultima modifica (ms)
-├─ settings        { vibrate, lastBackup, uid, email, nome, sincronizzato }
+├─ settings        { vibrate, suono, lastBackup, uid, email, nome, sincronizzato }
 ├─ eliminati       { id progetto: quando è stato eliminato (ms) }
 ├─ persone[]       { id, nome, tagliaBase ("donna:S"…), misure: { seno, vita, … } }
 ├─ personeUpdated  ultima modifica delle persone (ms)
@@ -47,7 +47,7 @@ stato
 | campione | "" = principale del progetto, altrimenti id di un campione |
 | misure[] | misure col metro: `{ giro, cm, data }` |
 | categoria | dietro, davanti, manica, sprone, bordo, altro (per "Rifai…") |
-| log[] | promemoria: { id, r: dal giro, to: al giro, t: testo } |
+| log[] | promemoria: { id, r: dal giro, to: al giro, t: testo, tipo: "aumenti" \| "diminuzioni" \| "colore" \| "altro" } (versione 6; se manca si indovina dal testo) |
 
 Formato 1 → 2 (`js/dati/migrazioni.js`): `hook` (testo) → `uncinetto`; `gauge` → primo campione con id `campione-{id progetto}`; `target` → `obiettivo` in giri; `hook` della parte → `uncinetto` con nota.
 

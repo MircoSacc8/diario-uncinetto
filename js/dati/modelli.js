@@ -1,6 +1,7 @@
 // Come è fatto un progetto, una parte, un promemoria e un campione (vedi docs/DATI.md).
 import { uid, ora } from "../utils/formato.js";
 import { indovinaCategoria } from "../calcoli/su-misura.js";
+import { indovinaTipo } from "../calcoli/promemoria.js";
 
 export const nuovoUncinetto = (altro = {}) => ({ tipo: "normale", mm: null, ...altro });
 
@@ -17,8 +18,9 @@ export const nuovaParte = (name, altro = {}) => ({
   ...altro,
 });
 
-// Promemoria da un giro a un altro. Se "to" manca vale solo per il giro "r"
-export const nuovaNota = (r, to, t) => ({ id: uid(), r, to: Math.max(r, to ?? r), t });
+// Promemoria da un giro a un altro. Se "to" manca vale solo per il giro "r".
+// tipo: aumenti, diminuzioni, colore, altro (se manca si indovina dal testo)
+export const nuovaNota = (r, to, t, tipo) => ({ id: uid(), r, to: Math.max(r, to ?? r), t, tipo: tipo || indovinaTipo(t) });
 
 // Campione: quante maglie e quanti giri stanno in 10 cm con un certo filato e uncinetto
 export const nuovoCampione = (altro = {}) => ({
