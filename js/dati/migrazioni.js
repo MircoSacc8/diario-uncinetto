@@ -2,8 +2,9 @@
 // Ogni passaggio si può ripetere senza danni: un progetto già aggiornato resta uguale.
 import { uid } from "../utils/formato.js";
 import { nuovaParte, nuovaNota, nuovoUncinetto, nuovoCampione } from "./modelli.js";
+import { indovinaCategoria } from "../calcoli/su-misura.js";
 
-export const VERSIONE_DATI = 4;
+export const VERSIONE_DATI = 5;
 
 // Primo numero in un testo: "5,5" → 5.5, "5 poi 6" → 5. Nessun numero → null
 export function primoNumero(testo) {
@@ -26,6 +27,8 @@ export function normalizzaProgetto(p) {
   // Versione 4: direzione di lavoro ("basso" = dal basso in alto, "alto" = dal collo) e calcolo dello sprone
   p.direzione = p.direzione === "alto" ? "alto" : "basso";
   p.sprone ??= null;
+  // Versione 5: taglia per cui è fatto il progetto ("donna:S", "persona:{id}"… oppure "")
+  p.taglia ??= "";
 
   // Versione 0: prima delle "parti" giri e promemoria stavano nel progetto
   if (!Array.isArray(p.parts) || !p.parts.length) {
@@ -58,6 +61,7 @@ export function normalizzaProgetto(p) {
     x.larghezza ??= 0;
     x.campione ??= "";
     x.misure = Array.isArray(x.misure) ? x.misure : [];
+    x.categoria ??= indovinaCategoria(x.name);   // versione 5: tipo di parte (corpo, manica, …)
     delete x.target; delete x.hook;
   });
   if (!p.parts.some((x) => x.id === p.active)) p.active = p.parts[0].id;
@@ -73,6 +77,9 @@ export function normalizzaStato(s) {
   s.projects.forEach(normalizzaProgetto);
   s.updatedAt ??= 0;
   s.eliminati = s.eliminati && typeof s.eliminati === "object" ? s.eliminati : {};  // id → quando è stato eliminato
+  // Versione 5: misure delle persone (Laura, clienti…), sincronizzate online come un blocco unico
+  s.persone = Array.isArray(s.persone) ? s.persone : [];
+  s.personeUpdated ??= 0;
   s.versione = VERSIONE_DATI;
   return s;
 }

@@ -9,6 +9,10 @@ import { firestore } from "./accesso.js";
 
 const ELIMINATO = "eliminato";
 let raccolta = null;          // riferimento alla raccolta online dell'utente
+let docPersone = null;        // utenti/{uid}/impostazioni/persone: misure delle persone
+let stopPersone = null;
+let personePronte = false;
+let personeInviate = 0;       // personeUpdated dell'ultima versione inviata o ricevuta
 let stopAscolto = null;
 const inviati = new Map();    // id → ultimo contenuto inviato o ricevuto (per non rimandare doppioni)
 let attesa = null;
@@ -57,6 +61,27 @@ export function avvia(uid, giaSincronizzato) {
     }
   }, () => impostaStato("attesa"));
 
+  // Misure delle persone: un solo documento, vince la versione più recente
+  docPersone = sdk.doc(db, "utenti", uid, "impostazioni", "persone");
+  personePronte = false;
+  stopPersone = sdk.onSnapshot(docPersone, (foto) => {
+    if (foto.metadata.fromCache && !giaSincronizzato && !personePronte) return;
+    const d = foto.exists() ? foto.data() : null;
+    if (d && d.updated > (S.dati.personeUpdated || 0)) {
+      try {
+        S.dati.persone = JSON.parse(d.json);
+        S.dati.personeUpdated = d.updated;
+        personeInviate = d.updated;
+        salvaArrivati();
+        disegnaDaFuori();
+      } catch { /* documento rovinato: tengo quelle del telefono */ }
+    } else if (d) {
+      personeInviate = d.updated;
+    }
+    personePronte = true;
+    programmaInvio();
+  }, () => {});
+
   if (!collegato) {
     collegato = true;
     quandoSalva(programmaInvio);
@@ -67,6 +92,11 @@ export function avvia(uid, giaSincronizzato) {
 export function ferma() {
   stopAscolto?.();
   stopAscolto = null;
+  stopPersone?.();
+  stopPersone = null;
+  docPersone = null;
+  personePronte = false;
+  personeInviate = 0;
   raccolta = null;
   pronto = false;
   inviati.clear();
@@ -98,15 +128,19 @@ function applica(remoti) {
 }
 
 function programmaInvio() {
-  if (!pronto) return;
+  if (!pronto && !personePronte) return;
   clearTimeout(attesa);
   attesa = setTimeout(inviaDifferenze, 800);
 }
 
 // Manda online solo i progetti cambiati rispetto all'ultima volta
 function inviaDifferenze() {
-  if (!raccolta) return;
   const { sdk } = firestore();
+  if (docPersone && personePronte && (S.dati.personeUpdated || 0) > personeInviate) {
+    personeInviate = S.dati.personeUpdated;
+    sdk.setDoc(docPersone, { updated: S.dati.personeUpdated, json: JSON.stringify(S.dati.persone || []) });
+  }
+  if (!raccolta || !pronto) return;
   for (const p of S.dati.projects) {
     const testo = comeTesto(p);
     if (inviati.get(p.id) === testo) continue;

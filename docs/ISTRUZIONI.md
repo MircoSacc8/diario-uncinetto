@@ -66,7 +66,7 @@ Tabella completa (donna XS–5XL, uomo S–5XL) in `dati/taglie.json`.
 - Rifinitura busto: 1 giro maglia alta + 6 giri maglia alta a rilievo + 2 giri maglia bassa a rilievo in altro colore.
 - Polsini: 3 giri maglia alta a rilievo + 2 giri maglia bassa a rilievo in altro colore.
 - Nota a parte (da chiarire a quale parte appartiene): giro attuale 64; diminuzioni dal 18 al 44; al 59 due dim; al 62 una dim; "10" di significato da chiarire.
-- Stima taglia L: posteriore circa 89 cat, quarti circa 45 cat, maniche circa 58 cat, manica 44,5 cm (da ricalcolare con il nuovo campione).
+- Con "Rifai…" S → L (stesso filato, agio 5/4): posteriore 88 cat, quarti 44 cat, maniche 58 cat, manica 44,5 cm.
 
 ## Regole di lavoro
 - Prima di scrivere codice, Claude chiede sempre conferma.
@@ -97,7 +97,8 @@ Repository: `MircoSacc8/diario-uncinetto` (pubblica, per GitHub Pages gratuito).
 - **Fase 3** (1 nov 2026, v1.5): uncinetto tipo + mm (progetto e parte), obiettivi parte in cm o giri, 📏 misura col metro (vince sul campione), campioni multipli per filato/uncinetto, catenelle da larghezza, convertitore cm ↔ giri/maglie. Dati versione 2 con migrazione automatica.
 - **Fase 3b** (1 nov 2026, v1.6): foto di ispirazione e del lavoro finito (max 6 per gruppo), didascalia, link alla fonte, miniatura nella lista; foto compresse salvate su telefono (IndexedDB) e online in Firestore `utenti/{uid}/foto/{id}`; incluse nel backup. Dati versione 3.
 - **Fase 4** (1 nov 2026, v1.7): direzione di lavoro per progetto (dal basso / dall'alto). Calcolatore sprone raglan top-down (avvio, divisione 1/3 dietro, 1/3 davanti, 1/6 per manica + 4 raglan; 8 aumenti a giro; ~2,5 cm di catenelle sotto l'ascella; separazione maniche alla profondità dello scalfo) che crea la parte "Sprone" con i promemoria. Agio predefinito **5 cm corpo, 4 cm maniche**, sempre modificabile. Misure riempibili da taglie standard donna/uomo (`dati/taglie.json`). Dati versione 4.
-- **Prossima: fase 5** — misure personali salvate (Laura, clienti…) con guida per misurare; tipo di parte (corpo, manica, sprone, bordo); "Rifai…" in un'altra taglia, sulle misure di una persona, o stesso capo con filato diverso, con riepilogo parte per parte.
+- **Fase 5** (1 nov 2026, v1.8): misure delle persone salvate (anche clienti) con guida per misurare e taglia di riferimento per le misure mancanti, sincronizzate online (`utenti/{uid}/impostazioni/persone`); tipo di parte; "Rifai…" in altra taglia (donna/uomo), su misura o con filato diverso, con riepilogo parte per parte. Dati versione 5.
+- **Tutte le fasi del piano sono fatte.** Prossimo: raccogliere le osservazioni di Laura e correggere.
 
 Fasi:
 0. Repository GitHub `diario-uncinetto` (pubblica) e GitHub Pages.

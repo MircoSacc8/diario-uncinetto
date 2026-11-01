@@ -14,6 +14,7 @@ import * as filati from "../componenti/filati.js";
 import * as campioni from "../componenti/campioni.js";
 import * as foto from "../componenti/foto.js";
 import * as topdown from "../componenti/topdown.js";
+import * as nuovaTaglia from "../componenti/nuova-taglia.js";
 import * as uncinetto from "../componenti/uncinetto.js";
 import { uncinettoTesto, campioneTesto } from "../calcoli/misure.js";
 
@@ -43,6 +44,7 @@ export function html(p) {
       <label for="appunti">Appunti<textarea id="appunti" placeholder="Misure, modifiche allo schema, idee…">${esc(p.notes)}</textarea></label>
     </section>
     <div class="azioni" style="justify-content:space-between">
+      ${nuovaTaglia.pulsante()}
       <button class="btn ghost piccolo" data-a="progetto-stato">${p.status === "finito" ? "Riapri progetto" : "Segna come finito"}</button>
       <button class="pericolo" data-a="progetto-elimina">Elimina progetto</button>
     </div>

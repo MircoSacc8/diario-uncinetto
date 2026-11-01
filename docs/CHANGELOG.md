@@ -1,5 +1,11 @@
 # Novità
 
+## v1.8 — 1 novembre 2026 (fase 5)
+- **Misure delle persone** (Impostazioni → Misure delle persone): seno, vita, fianchi, braccio, scalfo, manica, schiena, spalle, scollo, ognuna con la spiegazione di come prenderla. Le misure mancanti si prendono dalla taglia standard più vicina. Sono salvate online e le vede solo chi le ha inserite.
+- Ogni parte ha un **tipo** (corpo dietro/davanti, manica, sprone, bordo, altro), indovinato dal nome e modificabile.
+- **Rifai…** nel progetto: in un'altra taglia standard (donna o uomo), su misura di una persona, oppure stessa misura con filato diverso. Il corpo segue il giro seno, la manica il giro braccio e la lunghezza manica, il campione nuovo ricalcola catenelle e giri; i promemoria si spostano ai giri giusti; per i progetti dall'alto lo sprone si ricalcola. Prima di creare la copia c'è il riepilogo parte per parte con il motivo di ogni modifica.
+- Agio predefinito 5 cm corpo e 4 cm maniche, modificabile ogni volta.
+
 ## v1.7 — 1 novembre 2026 (fase 4)
 - Nel progetto si sceglie **come lo lavori**: dal basso in alto, oppure dall'alto (dal collo).
 - Per i progetti dall'alto: **calcolatore dello sprone raglan**. Da scollo, seno, braccio, profondità dello scalfo, agio (predefinito 5 cm corpo, 4 cm maniche, sempre modificabile) e campione calcola: catenelle d'avvio e divisione, giri di aumenti, quando separare le maniche e le catenelle sotto l'ascella.

@@ -6,6 +6,7 @@ import { nuovaParte } from "../dati/modelli.js";
 import { campioneDi, cmAttuali, percentuale, obiettivoRaggiunto, catenelleDaLarghezza } from "../calcoli/misure.js";
 import { apri, chiudi, pulsanti } from "./finestre.js";
 import * as uncinetto from "./uncinetto.js";
+import { CATEGORIE, indovinaCategoria } from "../calcoli/su-misura.js";
 
 function valoreScheda(p, x) {
   const c = campioneDi(p, x);
@@ -46,6 +47,10 @@ function modulo(p, x) {
   const c = campioneDi(p, x);
   apri(`<h2>${x ? "Modifica parte" : "Nuova parte"}</h2>
     <label for="p-nome">Nome<input id="p-nome" name="name" required value="${esc(x?.name)}" placeholder="Es. Manica dx"></label>
+    <label for="p-categoria">Tipo di parte
+      <select id="p-categoria" name="categoria">${Object.entries(CATEGORIE).map(([k, t]) =>
+        `<option value="${k}" ${(x?.categoria || "") === k ? "selected" : ""}>${t}</option>`).join("")}</select></label>
+    <div class="hint">Serve a “Rifai…”: il corpo segue il giro seno, la manica il giro braccio.</div>
 
     <fieldset class="scelta"><legend>Obiettivo</legend>
       <div class="segmenti">
@@ -70,6 +75,7 @@ function modulo(p, x) {
   (d) => {
     const valori = {
       name: d.get("name").trim(),
+      categoria: x ? d.get("categoria") : (d.get("categoria") !== "altro" ? d.get("categoria") : indovinaCategoria(d.get("name"))),
       obiettivo: { tipo: d.get("ob-tipo") === "cm" ? "cm" : "giri", valore: num(d.get("ob-valore")) },
       larghezza: num(d.get("larghezza")),
       start: d.get("start").trim(),

@@ -1,5 +1,6 @@
 // Come è fatto un progetto, una parte, un promemoria e un campione (vedi docs/DATI.md).
 import { uid, ora } from "../utils/formato.js";
+import { indovinaCategoria } from "../calcoli/su-misura.js";
 
 export const nuovoUncinetto = (altro = {}) => ({ tipo: "normale", mm: null, ...altro });
 
@@ -11,6 +12,7 @@ export const nuovaParte = (name, altro = {}) => ({
   uncinetto: null,                          // null = come il progetto
   campione: "",                             // "" = campione principale del progetto
   misure: [],                               // misure prese col metro: { giro, cm, data }
+  categoria: indovinaCategoria(name),       // dietro, davanti, manica, sprone, bordo, altro
   log: [],
   ...altro,
 });
@@ -23,13 +25,15 @@ export const nuovoCampione = (altro = {}) => ({
   id: uid(), nome: "", filato: "", uncinetto: nuovoUncinetto(), punto: "", maglie10: 0, giri10: 0, ...altro,
 });
 
+export const nuovaPersona = (altro = {}) => ({ id: uid(), nome: "", tagliaBase: "", misure: {}, ...altro });
+
 export function nuovoProgetto(altro = {}) {
   const parts = altro.parts?.length ? altro.parts : [nuovaParte("Principale")];
   return {
     id: uid(), name: "", status: "in corso", uncinetto: nuovoUncinetto(), pattern: "",
     campioni: [], campione: "",
     foto: [], ispirazioneLink: "",
-    direzione: "basso", sprone: null,
+    direzione: "basso", sprone: null, taglia: "",
     stitchCount: 0, stitches: [], yarns: [], counters: [], notes: "",
     time: 0, timerStart: null, created: ora(), updated: ora(),
     ...altro,

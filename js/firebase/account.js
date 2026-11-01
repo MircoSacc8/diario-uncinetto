@@ -95,6 +95,8 @@ export const azioni = {
     sincronizza.ferma();
     S.dati.projects = [];
     S.dati.eliminati = {};
+    S.dati.persone = [];
+    S.dati.personeUpdated = 0;
     for (const k of ["uid", "email", "nome", "sincronizzato"]) delete S.dati.settings[k];
     salvaArrivati();
     vai("accesso");

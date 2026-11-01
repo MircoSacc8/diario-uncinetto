@@ -21,8 +21,10 @@ import * as uncinetto from "./componenti/uncinetto.js";
 import * as foto from "./componenti/foto.js";
 import * as topdown from "./componenti/topdown.js";
 import * as sorgenti from "./componenti/sorgenti-misure.js";
+import * as nuovaTaglia from "./componenti/nuova-taglia.js";
+import * as persone from "./schermate/persone.js";
 
-const moduli = [account, schermataAccesso, home, scheda, impostazioni, finestre, parti, contagiri, promemoria, timer, convertitore, contatori, punti, filati, campioni, misura, foto, topdown];
+const moduli = [account, schermataAccesso, home, scheda, impostazioni, finestre, parti, contagiri, promemoria, timer, convertitore, contatori, punti, filati, campioni, misura, foto, topdown, nuovaTaglia, persone];
 const azioni = Object.assign({}, ...moduli.map((m) => m.azioni || {}));
 const suInput = Object.assign({}, ...moduli.map((m) => m.input || {}));
 const suCambio = Object.assign({}, ...moduli.map((m) => m.cambio || {}));
@@ -42,6 +44,7 @@ function mostra() {
     accesso: schermataAccesso.html,
     "senza-rete": schermataAccesso.senzaRete,
     impostazioni: impostazioni.html,
+    persone: persone.html,
     home: home.html,
   };
   app.innerHTML = p ? scheda.html(p) : (schermate[S.vista.schermata] || home.html)();
@@ -82,7 +85,8 @@ async function inizia() {
   finestre.collega();
   quandoCambia(mostra);
   quandoCambia(schermoAcceso);
-  await Promise.all([punti.caricaElenco(), uncinetto.caricaElenco(), sorgenti.caricaTaglie()]);
+  await Promise.all([punti.caricaElenco(), uncinetto.caricaElenco(), sorgenti.caricaTaglie(), persone.caricaGuida()]);
+  nuovaTaglia.collegaModo();
   timer.avviaTicchettio();
   pwa.quandoAggiornamento(disegna);
   pwa.registra();

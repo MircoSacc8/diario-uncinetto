@@ -1,4 +1,4 @@
-# Formato dei dati (versione dati 4)
+# Formato dei dati (versione dati 5)
 
 Salvati nel telefono, chiave `diario-uncinetto` di localStorage.
 
@@ -8,6 +8,8 @@ stato
 ├─ updatedAt       ultima modifica (ms)
 ├─ settings        { vibrate, lastBackup, uid, email, nome, sincronizzato }
 ├─ eliminati       { id progetto: quando è stato eliminato (ms) }
+├─ persone[]       { id, nome, tagliaBase ("donna:S"…), misure: { seno, vita, … } }
+├─ personeUpdated  ultima modifica delle persone (ms)
 └─ projects[]      progetti
 ```
 
@@ -30,6 +32,7 @@ stato
 | ispirazioneLink | link alla fonte d'ispirazione ("" se nessuno) |
 | direzione | "basso" (dal basso in alto) oppure "alto" (dal collo) |
 | sprone | null oppure `{ misure, risultato }` dell'ultimo calcolo dello sprone raglan (`js/calcoli/raglan.js`) |
+| taglia | per cosa è fatto: "donna:S", "uomo:L", "persona:{id}" oppure "" |
 | created, updated | date (ms) |
 
 ## Parte
@@ -43,6 +46,7 @@ stato
 | uncinetto | null = come il progetto, altrimenti `{ tipo, mm, nota }` |
 | campione | "" = principale del progetto, altrimenti id di un campione |
 | misure[] | misure col metro: `{ giro, cm, data }` |
+| categoria | dietro, davanti, manica, sprone, bordo, altro (per "Rifai…") |
 | log[] | promemoria: { id, r: dal giro, to: al giro, t: testo } |
 
 Formato 1 → 2 (`js/dati/migrazioni.js`): `hook` (testo) → `uncinetto`; `gauge` → primo campione con id `campione-{id progetto}`; `target` → `obiettivo` in giri; `hook` della parte → `uncinetto` con nota.
@@ -52,6 +56,9 @@ Formato 1 → 2 (`js/dati/migrazioni.js`): `hook` (testo) → `uncinetto`; `gaug
 Un progetto eliminato resta come documento con `eliminato: true` (così non ricompare).
 Unione: `js/calcoli/unione.js` → `unisciRemoti` (vince `updated` più recente; vedi test/unione.test.js).
 `updated` viene aggiornato da `salva()` in `js/dati/stato.js` per ogni progetto il cui contenuto è cambiato.
+
+## Misure delle persone online
+`utenti/{uid}/impostazioni/persone` → `{ updated, json }` (tutto l'elenco; vince il più recente).
 
 ## Foto
 Immagini JPEG in base64 (lato lungo 1200 px + miniatura 240 px), mai dentro il progetto:

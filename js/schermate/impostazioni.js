@@ -44,6 +44,9 @@ export function html() {
       <p class="hint" id="stato-sync">${testoStato()}</p>
       ${settings.uid ? `<button class="btn ghost" data-a="esci-chiedi">Esci dall'account</button>` : ""}
     </section>
+    <section class="card"><div class="card-h"><h2>Misure delle persone</h2><button class="btn ghost piccolo" data-a="persone">Apri</button></div>
+      <p class="testo-muto">${S.dati.persone.length ? `${S.dati.persone.length} ${S.dati.persone.length === 1 ? "persona salvata" : "persone salvate"}: ${S.dati.persone.map((x) => esc(x.nome)).join(", ")}.` : "Salva le misure di chi vestirai, per fare i capi su misura."}</p>
+    </section>
     <section class="card"><h2>Backup dei progetti</h2>
       <p class="testo-muto">Salva un file con tutti i progetti e le foto in File o iCloud. Se cambi telefono, lo reimporti e ritrovi tutto.</p>
       <p class="${backupDaFare() ? "attenzione" : "hint"}">${ultimo}</p>

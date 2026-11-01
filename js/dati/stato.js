@@ -17,7 +17,9 @@ const dopoSalvataggio = [];
 // Impronta di ogni progetto (senza la data di modifica): serve a capire cosa è cambiato
 const impronte = new Map();
 const impronta = (p) => JSON.stringify({ ...p, updated: 0 });
+let improntaPersone = "";
 export function ricordaImpronte() {
+  improntaPersone = JSON.stringify(S.dati.persone || []);
   impronte.clear();
   S.dati.projects.forEach((p) => impronte.set(p.id, impronta(p)));
 }
@@ -38,6 +40,8 @@ export function salva() {
     const nuova = impronta(p);
     if (impronte.get(p.id) !== nuova) { p.updated = adesso; impronte.set(p.id, nuova); }
   }
+  const persone = JSON.stringify(S.dati.persone || []);
+  if (persone !== improntaPersone) { S.dati.personeUpdated = adesso; improntaPersone = persone; }
   S.dati.updatedAt = adesso;
   scrivi(S.dati);
   dopoSalvataggio.forEach((fn) => fn());

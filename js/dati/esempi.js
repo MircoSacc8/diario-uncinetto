@@ -12,6 +12,7 @@ export function cardigan() {
     created: 1,
     updated: 1,
     name: "Cardigan Laura",
+    taglia: "donna:S",
     uncinetto: nuovoUncinetto({ mm: 5.5 }),
     campioni: [campione],
     campione: campione.id,
