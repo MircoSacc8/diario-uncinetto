@@ -1,5 +1,9 @@
 # Novità
 
+## v1.4 — 1 novembre 2026
+- Nuovi colori: beige chiaro e rosa antico (scelti da Mircuz). Anche l'icona è in rosa antico.
+- L'app resta sempre chiara, anche quando l'iPhone è in modalità scura.
+
 ## v1.3 — 1 novembre 2026
 - Accesso anche con **email e password**, accanto a Google: nessuna finestra da aprire, quindi funziona sempre anche dall'app aggiunta alla Home.
 - "Crea account" e "Password dimenticata?" (arriva un'email in italiano per sceglierne una nuova).

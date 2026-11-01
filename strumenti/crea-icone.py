@@ -3,9 +3,9 @@ Uso: python3 strumenti/crea-icone.py  → scrive i PNG in assets/icone/"""
 from PIL import Image, ImageDraw
 import math, os
 
-SFONDO = (122, 62, 116)      # prugna, come --accent
-GOMITOLO = (241, 227, 239)   # rosa chiaro
-FILO = (122, 62, 116)
+SFONDO = (168, 103, 107)     # rosa antico, come --accent
+GOMITOLO = (246, 239, 231)   # beige, come --bg
+FILO = (168, 103, 107)
 SCALA = 4                    # disegno grande e poi riduco, per bordi lisci
 
 def disegna(lato):

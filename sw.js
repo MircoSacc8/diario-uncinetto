@@ -1,6 +1,6 @@
 // Service worker: fa funzionare l'app anche senza internet.
 // A OGNI RILASCIO aumenta VERSIONE (uguale a js/versione.js) e, se aggiungi file, mettili in FILE.
-const VERSIONE = "1.3.0";
+const VERSIONE = "1.4.0";
 const CACHE = `uncinetto-${VERSIONE}`;
 const CACHE_FONT = "uncinetto-font";
 const CACHE_FIREBASE = "uncinetto-firebase";

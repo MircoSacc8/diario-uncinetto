@@ -11,7 +11,7 @@ Leggi prima `docs/ISTRUZIONI.md` (obiettivo, decisioni, piano a fasi, regole di 
 
 ## Struttura
 - `index.html` solo scheletro. Niente codice dentro.
-- `css/` → `temi.css` (colori, font, misure), `base.css` (impaginazione), `componenti.css` (una sezione per componente).
+- `css/` → `temi.css` (colori beige e rosa antico, sempre tema chiaro; font, misure), `base.css` (impaginazione), `componenti.css` (una sezione per componente).
 - `js/main.js` → avvio e smistamento dei tocchi (`data-a="nome-azione"`).
 - `js/dati/` → stato, salvataggio, modelli, migrazioni, progetto di esempio.
 - `js/calcoli/` → funzioni pure (niente DOM), sempre con test in `test/`.

@@ -1,18 +1,19 @@
 /* Colori e font. Ogni colore è un "token": i componenti usano solo questi. */
 :root {
-  --bg: #f3f1f6;
-  --surface: #ffffff;
-  --ink: #2a2233;
-  --muted: #776e82;
-  --line: #e2dde9;
-  --accent: #7a3e74;
+  /* Beige chiaro e rosa antico (scelti da Mircuz). L'app resta sempre chiara, anche col telefono in modalità scura. */
+  --bg: #f6efe7;
+  --surface: #fffaf5;
+  --ink: #3d3330;
+  --muted: #85766d;
+  --line: #eaded3;
+  --accent: #a8676b;
   --accent-ink: #ffffff;
-  --accent-soft: #f1e3ef;
-  --mint: #d9ede4;
-  --mint-ink: #1f5a45;
-  --warn: #b4234a;
-  --live: #2e9d6b;
-  --velo: rgb(20 12 24 / .45);
+  --accent-soft: #f3e2df;
+  --mint: #e6ecdf;
+  --mint-ink: #4b5b41;
+  --warn: #a8463a;
+  --live: #6f9a63;
+  --velo: rgb(61 51 48 / .35);
 
   --display: "Bricolage Grotesque", ui-rounded, system-ui, sans-serif;
   --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -27,21 +28,3 @@
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #18141c;
-    --surface: #231d29;
-    --ink: #efe9f3;
-    --muted: #a69cb1;
-    --line: #352d3d;
-    --accent: #d59bce;
-    --accent-ink: #24121f;
-    --accent-soft: #3a2537;
-    --mint: #1d3a2f;
-    --mint-ink: #a9e0c8;
-    --warn: #ff8fa8;
-    --live: #4fc58f;
-    --velo: rgb(0 0 0 / .6);
-    color-scheme: dark;
-  }
-}

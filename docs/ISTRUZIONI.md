@@ -93,6 +93,7 @@ Repository: `MircoSacc8/diario-uncinetto` (pubblica, per GitHub Pages gratuito).
 - **Firebase configurato** (1 nov 2026), account Google di Mircuz: progetto `diario-uncinetto` (ID `diario-uncinetto-c2c4e`), piano Spark gratuito, app web "Diario dell'Uncinetto" registrata, accesso con Google attivo (nome mostrato: "Diario dell'Uncinetto", email assistenza di Mircuz), dominio autorizzato `mircosacc8.github.io`, Firestore Standard in **eur3 (Europa)** in modalità produzione, regole pubblicate (copia in `firestore.rules`: ognuno solo `utenti/{suo id}/…`). Backup automatici di Firestore non disponibili sul piano gratuito: restano Esporta/Importa.
 - **Fase 2b** (1 nov 2026, v1.2): accesso con Google obbligatorio, copia online su Firestore (`utenti/{uid}/progetti/{id}`), unione che rispetta le eliminazioni, stato della sincronizzazione in home e impostazioni, uscita dall'account. Da provare sull'iPhone di Mircuz (Safari e app sulla Home) prima di dare il link a Laura.
 - **v1.3** (1 nov 2026): accesso anche con email e password (deciso da Mircuz per evitare problemi della finestra Google sull'iPhone), "Crea account", "Password dimenticata?". Chiave web Firebase limitata ai domini dell'app in Google Cloud (avviso GitHub "secret detected" atteso: la chiave è pubblica per design).
+- **v1.4** (1 nov 2026): colori beige chiaro e rosa antico (scelta B di Mircuz), app sempre chiara anche in modalità scura, icona ricolorata. Mircuz ha provato su iPhone l'accesso con email e password: funziona.
 - **Prossima: fase 3** — uncinetto con tipo (normale/tunisino) e mm, obiettivi in cm, misura col metro, campione per filato e uncinetto.
 
 Fasi:
@@ -118,5 +119,5 @@ L'app si usa **solo da cellulare**. Quindi:
 ## Tecnica
 - Codice: repository `MircoSacc8/diario-uncinetto`, struttura descritta in `CLAUDE.md`. App online: https://mircosacc8.github.io/diario-uncinetto/
 - La vecchia versione a file unico (v3) resta nel progetto come `app/index.html`, solo come archivio.
-- Font da Google Fonts (Bricolage Grotesque, Figtree), tema chiaro e scuro.
+- Font da Google Fonts (Bricolage Grotesque, Figtree). Colori: beige chiaro e rosa antico, sempre tema chiaro.
 - Repository GitHub con GitHub Pages attivo sul branch principale.
