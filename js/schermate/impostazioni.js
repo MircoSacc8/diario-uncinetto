@@ -1,0 +1,77 @@
+// Schermata impostazioni: backup, installazione sulla Home, vibrazione, versione.
+import { S, aggiorna, salva } from "../dati/stato.js";
+import { esportaFile, leggiBackup, importaNeiDati } from "../dati/backup.js";
+import { avviso } from "../componenti/avvisi.js";
+import { suHome, suIphone, aggiornamentoPronto, applicaAggiornamento } from "../pwa/installa.js";
+import { VERSIONE_APP } from "../versione.js";
+
+const GIORNI_PROMEMORIA = 30;
+const GIORNO = 24 * 60 * 60 * 1000;
+
+const dataLeggibile = (ms) => new Date(ms).toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" });
+
+// true se è ora di ricordare il backup (ci sono progetti e l'ultimo è vecchio o mai fatto)
+export function backupDaFare() {
+  const ultimo = S.dati.settings.lastBackup || 0;
+  return S.dati.projects.length > 0 && Date.now() - ultimo > GIORNI_PROMEMORIA * GIORNO;
+}
+
+// Istruzioni per aggiungere l'app alla Home (solo se aperta da Safari)
+export function istruzioniHome() {
+  if (suHome()) return "";
+  const passi = suIphone()
+    ? "In Safari tocca <b>Condividi</b> (il quadrato con la freccia) → <b>Aggiungi alla schermata Home</b>."
+    : "Nel menu del browser scegli <b>Installa app</b> o <b>Aggiungi a schermata Home</b>.";
+  return `<section class="card evidenza"><h2>Mettila sulla schermata Home</h2>
+    <p>Così si apre come un'app e il telefono non cancella i tuoi progetti.</p><p>${passi}</p></section>`;
+}
+
+export function html() {
+  const { settings } = S.dati;
+  const ultimo = settings.lastBackup ? `Ultimo backup: ${dataLeggibile(settings.lastBackup)}` : "Non hai ancora fatto un backup.";
+  return `
+    <button class="link" data-a="home" style="align-self:flex-start">← Tutti i progetti</button>
+    <div class="top"><div><div class="eyebrow">Diario dell'Uncinetto</div><h1>Impostazioni</h1></div></div>
+    ${aggiornamentoPronto() ? `<section class="card evidenza"><h2>Aggiornamento pronto</h2>
+      <button class="btn" data-a="aggiorna-app">Aggiorna l'app</button></section>` : ""}
+    ${istruzioniHome()}
+    <section class="card"><h2>Backup dei progetti</h2>
+      <p class="testo-muto">Salva un file con tutti i progetti in File o iCloud. Se cambi telefono, lo reimporti e ritrovi tutto.</p>
+      <p class="${backupDaFare() ? "attenzione" : "hint"}">${ultimo}</p>
+      <button class="btn" data-a="backup-esporta">Esporta backup</button>
+      <label class="btn ghost carica" for="backup-file">Importa backup<input id="backup-file" type="file" accept="application/json,.json" hidden></label>
+      <p class="hint">Importare aggiunge i progetti del file. Se un progetto c'è già, tiene la versione più recente: non cancella niente.</p>
+    </section>
+    <section class="card"><h2>Preferenze</h2>
+      <label class="interruttore" for="vibrazione">Vibrazione a ogni giro<input id="vibrazione" type="checkbox" ${settings.vibrate ? "checked" : ""}></label>
+    </section>
+    <p class="hint">Versione ${VERSIONE_APP} · I progetti sono salvati su questo telefono.</p>`;
+}
+
+export const azioni = {
+  "impostazioni": () => { S.vista.id = null; S.vista.schermata = "impostazioni"; aggiorna(); scrollTo(0, 0); },
+  "backup-esporta": async () => {
+    const fatto = await esportaFile(S.dati);
+    if (!fatto) return;
+    S.dati.settings.lastBackup = Date.now();
+    aggiorna();
+    avviso("Backup pronto");
+  },
+  "aggiorna-app": () => applicaAggiornamento(),
+};
+
+export const cambio = {
+  "vibrazione": (el) => { S.dati.settings.vibrate = el.checked; salva(); },
+  "backup-file": async (el) => {
+    const file = el.files?.[0];
+    el.value = "";
+    if (!file) return;
+    try {
+      const { aggiunti, aggiornati } = importaNeiDati(S.dati, leggiBackup(await file.text()));
+      aggiorna();
+      avviso(aggiunti + aggiornati ? `Importati: ${aggiunti} nuovi, ${aggiornati} aggiornati` : "Nessuna novità: hai già tutto");
+    } catch (e) {
+      avviso(e.message);
+    }
+  },
+};

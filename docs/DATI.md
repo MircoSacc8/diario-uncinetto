@@ -6,7 +6,7 @@ Salvati nel telefono, chiave `diario-uncinetto` di localStorage.
 stato
 ├─ versione        numero del formato (vedi js/dati/migrazioni.js)
 ├─ updatedAt       ultima modifica (ms)
-├─ settings        { vibrate: true/false }
+├─ settings        { vibrate: true/false, lastBackup: data ultimo backup in ms }
 └─ projects[]      progetti
 ```
 
@@ -34,5 +34,8 @@ stato
 | start | partenza (es. "50 cat") |
 | hook | uncinetto se diverso dal progetto |
 | log[] | promemoria: { id, r: dal giro, to: al giro, t: testo } |
+
+## File di backup
+`{ app: "diario-uncinetto", versioneDati, esportatoIl, dati: stato }`. All'importazione i progetti si uniscono per id (vince `updated` più recente).
 
 Cambiando formato: aumentare `VERSIONE_DATI`, aggiungere la migrazione e il suo test.

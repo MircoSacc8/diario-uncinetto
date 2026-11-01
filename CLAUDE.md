@@ -29,6 +29,11 @@ Leggi prima `docs/ISTRUZIONI.md` (obiettivo, decisioni, piano a fasi, regole di 
 - PC di Mircuz: `C:\Users\mirco\Desktop\WebApp\Diario_Uncinetto` (stessa repository).
 - Flusso: modifica → `npm test` → commit e push dalla copia di Claude → `git pull` nella cartella del PC, così resta sempre allineata.
 
+## App installabile (PWA)
+- A ogni rilascio aumenta la versione **in due posti**: `js/versione.js` e `VERSIONE` in `sw.js` (il test lo controlla). Senza questo i telefoni non ricevono l'aggiornamento.
+- Ogni file nuovo in `js/`, `css/`, `dati/`, `assets/` va aggiunto all'elenco `FILE` di `sw.js` (il test lo controlla).
+- Le icone si rigenerano con `python3 strumenti/crea-icone.py`.
+
 ## Test e pubblicazione
 - Test: `npm test` (Node 20+, nessuna installazione).
 - Pubblicazione: GitHub Pages dal branch `main`, cartella principale. Ogni fase chiusa ha un tag (`v1.0`, `v1.1`…).

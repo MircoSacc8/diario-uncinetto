@@ -1,0 +1,17 @@
+{
+  "name": "Diario dell'Uncinetto",
+  "short_name": "Uncinetto",
+  "description": "Contagiri, misure, filati e taglie per i progetti all'uncinetto",
+  "lang": "it",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3f1f6",
+  "theme_color": "#7a3e74",
+  "icons": [
+    { "src": "assets/icone/icona-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icone/icona-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icone/icona-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

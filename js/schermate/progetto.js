@@ -37,7 +37,6 @@ export function html(p) {
       <button class="btn ghost piccolo" data-a="progetto-stato">${p.status === "finito" ? "Riapri progetto" : "Segna come finito"}</button>
       <button class="pericolo" data-a="progetto-elimina">Elimina progetto</button>
     </div>
-    <label class="interruttore" for="vibrazione">Vibrazione a ogni giro<input id="vibrazione" type="checkbox" ${S.dati.settings.vibrate ? "checked" : ""}></label>
     ${contagiri.barra()}`;
 }
 
@@ -60,7 +59,7 @@ export function moduloProgetto(p) {
 }
 
 export const azioni = {
-  "home": () => { S.vista.id = null; aggiorna(); scrollTo(0, 0); },
+  "home": () => { S.vista.id = null; S.vista.schermata = "home"; aggiorna(); scrollTo(0, 0); },
   "progetto-modifica": ({ p }) => moduloProgetto(p),
   "progetto-stato": ({ p }) => {
     p.status = p.status === "finito" ? "in corso" : "finito";
@@ -76,7 +75,4 @@ export const azioni = {
 
 export const input = {
   "appunti": (el, { p }) => { p.notes = el.value; salva(); },
-};
-export const cambio = {
-  "vibrazione": (el) => { S.dati.settings.vibrate = el.checked; salva(); },
 };

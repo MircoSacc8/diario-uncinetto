@@ -116,3 +116,14 @@
 /* ---- Avviso temporaneo ---- */
 .avviso { position: fixed; left: 16px; right: 16px; bottom: calc(var(--barra-h) + 16px + var(--sicuro-giu)); margin: 0 auto; width: fit-content; max-width: calc(100% - 32px);
   background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 999px; font-size: .9rem; z-index: 30; text-align: center; }
+
+/* ---- Impostazioni, backup, aggiornamenti ---- */
+.ingranaggio { font-size: 1.4rem; background: var(--surface); border: 1px solid var(--line); flex: 0 0 auto; }
+.evidenza { border-color: var(--accent); background: var(--accent-soft); }
+.evidenza p { margin: 0; }
+.card p { margin: 0; }
+.attenzione { color: var(--warn); font-weight: 600; }
+.carica { display: flex; align-items: center; justify-content: center; color: var(--ink); font-size: 1rem; }
+.striscia { width: 100%; min-height: var(--tocco); border-radius: 14px; padding: 10px 14px; background: var(--mint); color: var(--mint-ink); font-weight: 600; text-align: left; }
+.striscia.attenzione { background: var(--accent-soft); color: var(--warn); }
+.interruttore input { accent-color: var(--accent); }

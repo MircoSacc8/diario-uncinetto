@@ -7,7 +7,8 @@ import { ora } from "../utils/formato.js";
 
 export const S = {
   dati: null,
-  vista: { id: null, filtro: "in corso" },  // id = progetto aperto, null = lista
+  // id = progetto aperto; schermata = "home" o "impostazioni" quando nessun progetto è aperto
+  vista: { id: null, schermata: "home", filtro: "in corso" },
 };
 
 const ascoltatori = [];

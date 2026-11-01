@@ -2,6 +2,8 @@
 import { esc, durata } from "../utils/formato.js";
 import { S, aggiorna, parteAttiva, tempoTrascorso } from "../dati/stato.js";
 import { moduloProgetto } from "./progetto.js";
+import { backupDaFare, istruzioniHome } from "./impostazioni.js";
+import { aggiornamentoPronto } from "../pwa/installa.js";
 
 const FILTRI = ["in corso", "finito", "tutti"];
 
@@ -31,12 +33,16 @@ export function html() {
   return `
     <div class="top">
       <div><div class="eyebrow">Progetti all'uncinetto</div><h1>Diario dell'Uncinetto</h1></div>
+      <button class="tondo ingranaggio" data-a="impostazioni" aria-label="Impostazioni">⚙︎</button>
     </div>
+    ${aggiornamentoPronto() ? `<button class="striscia" data-a="aggiorna-app">Aggiornamento pronto · tocca per aggiornare</button>` : ""}
+    ${backupDaFare() ? `<button class="striscia attenzione" data-a="impostazioni">È ora di fare un backup dei progetti · apri</button>` : ""}
     <button class="btn" data-a="progetto-nuovo">+ Nuovo progetto</button>
     <div class="filtri">${FILTRI.map((f) =>
       `<button class="filtro" data-a="filtro" data-v="${f}" aria-pressed="${filtro === f}">${f[0].toUpperCase() + f.slice(1)}</button>`).join("")}</div>
     <div class="lista">${lista.length ? lista.map(scheda).join("")
       : `<div class="vuoto">Nessun progetto qui.<br>Tocca “Nuovo progetto” per iniziare a contare.</div>`}</div>
+    ${istruzioniHome()}
     <p class="hint">I progetti sono salvati su questo telefono.</p>`;
 }
 
