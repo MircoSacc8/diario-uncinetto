@@ -90,7 +90,9 @@ Repository: `MircoSacc8/diario-uncinetto` (pubblica, per GitHub Pages gratuito).
 - Nota: GitHub Pages tiene in cache i file per circa 10 minuti, quindi dopo un aggiornamento il telefono può vedere la versione vecchia per qualche minuto. Nella fase 2 il service worker gestirà gli aggiornamenti.
 - **Cartella sul PC** (1 nov 2026): `C:\Users\mirco\Desktop\WebApp\Diario_Uncinetto`, copia della repository (git, branch `main`, tag v1.0 creato da Mircuz). Claude la raggiunge quando la chat è collegata al PC: lì fa pull e i test; i push partono dalla copia di Claude nel cloud perché la shell del PC non ha le credenziali GitHub.
 - **Fase 2a** (1 nov 2026, v1.1): app installabile sulla Home con icona, funziona offline, avviso di aggiornamento, dati permanenti, schermata Impostazioni con Esporta/Importa backup (unione senza cancellare), promemoria backup dopo 30 giorni.
-- **Prossima: fase 2b** — accesso con Google obbligatorio al primo avvio e copia dei progetti su Firebase (progetto creato con l'account Google di Mircuz; ognuno vede solo i propri progetti).
+- **Firebase configurato** (1 nov 2026), account Google di Mircuz: progetto `diario-uncinetto` (ID `diario-uncinetto-c2c4e`), piano Spark gratuito, app web "Diario dell'Uncinetto" registrata, accesso con Google attivo (nome mostrato: "Diario dell'Uncinetto", email assistenza di Mircuz), dominio autorizzato `mircosacc8.github.io`, Firestore Standard in **eur3 (Europa)** in modalità produzione, regole pubblicate (copia in `firestore.rules`: ognuno solo `utenti/{suo id}/…`). Backup automatici di Firestore non disponibili sul piano gratuito: restano Esporta/Importa.
+- **Fase 2b** (1 nov 2026, v1.2): accesso con Google obbligatorio, copia online su Firestore (`utenti/{uid}/progetti/{id}`), unione che rispetta le eliminazioni, stato della sincronizzazione in home e impostazioni, uscita dall'account. Da provare sull'iPhone di Mircuz (Safari e app sulla Home) prima di dare il link a Laura.
+- **Prossima: fase 3** — uncinetto con tipo (normale/tunisino) e mm, obiettivi in cm, misura col metro, campione per filato e uncinetto.
 
 Fasi:
 0. Repository GitHub `diario-uncinetto` (pubblica) e GitHub Pages.

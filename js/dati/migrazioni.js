@@ -39,6 +39,7 @@ export function normalizzaStato(s) {
   s.projects = Array.isArray(s.projects) ? s.projects : [];
   s.projects.forEach(normalizzaProgetto);
   s.updatedAt ??= 0;
+  s.eliminati = s.eliminati && typeof s.eliminati === "object" ? s.eliminati : {};  // id → quando è stato eliminato
   s.versione = VERSIONE_DATI;
   return s;
 }

@@ -6,7 +6,8 @@ Salvati nel telefono, chiave `diario-uncinetto` di localStorage.
 stato
 ├─ versione        numero del formato (vedi js/dati/migrazioni.js)
 ├─ updatedAt       ultima modifica (ms)
-├─ settings        { vibrate: true/false, lastBackup: data ultimo backup in ms }
+├─ settings        { vibrate, lastBackup, uid, email, nome, sincronizzato }
+├─ eliminati       { id progetto: quando è stato eliminato (ms) }
 └─ projects[]      progetti
 ```
 
@@ -34,6 +35,12 @@ stato
 | start | partenza (es. "50 cat") |
 | hook | uncinetto se diverso dal progetto |
 | log[] | promemoria: { id, r: dal giro, to: al giro, t: testo } |
+
+## Copia online (Firestore, regione eur3)
+`utenti/{uid}/progetti/{id progetto}` → `{ nome, updated, eliminato, json }`, dove `json` è il progetto intero.
+Un progetto eliminato resta come documento con `eliminato: true` (così non ricompare).
+Unione: `js/calcoli/unione.js` → `unisciRemoti` (vince `updated` più recente; vedi test/unione.test.js).
+`updated` viene aggiornato da `salva()` in `js/dati/stato.js` per ogni progetto il cui contenuto è cambiato.
 
 ## File di backup
 `{ app: "diario-uncinetto", versioneDati, esportatoIl, dati: stato }`. All'importazione i progetti si uniscono per id (vince `updated` più recente).

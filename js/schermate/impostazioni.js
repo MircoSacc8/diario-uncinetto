@@ -4,6 +4,9 @@ import { esportaFile, leggiBackup, importaNeiDati } from "../dati/backup.js";
 import { avviso } from "../componenti/avvisi.js";
 import { suHome, suIphone, aggiornamentoPronto, applicaAggiornamento } from "../pwa/installa.js";
 import { VERSIONE_APP } from "../versione.js";
+import { esc } from "../utils/formato.js";
+import { testoStato, azioni as azioniAccount } from "../firebase/account.js";
+import { conferma } from "../componenti/finestre.js";
 
 const GIORNI_PROMEMORIA = 30;
 const GIORNO = 24 * 60 * 60 * 1000;
@@ -35,6 +38,11 @@ export function html() {
     ${aggiornamentoPronto() ? `<section class="card evidenza"><h2>Aggiornamento pronto</h2>
       <button class="btn" data-a="aggiorna-app">Aggiorna l'app</button></section>` : ""}
     ${istruzioniHome()}
+    <section class="card"><h2>Account</h2>
+      ${settings.email ? `<p>Account Google: <b>${esc(settings.email)}</b></p>` : "<p>Nessun account collegato.</p>"}
+      <p class="hint" id="stato-sync">${testoStato()}</p>
+      ${settings.uid ? `<button class="btn ghost" data-a="esci-chiedi">Esci dall'account</button>` : ""}
+    </section>
     <section class="card"><h2>Backup dei progetti</h2>
       <p class="testo-muto">Salva un file con tutti i progetti in File o iCloud. Se cambi telefono, lo reimporti e ritrovi tutto.</p>
       <p class="${backupDaFare() ? "attenzione" : "hint"}">${ultimo}</p>
@@ -45,7 +53,7 @@ export function html() {
     <section class="card"><h2>Preferenze</h2>
       <label class="interruttore" for="vibrazione">Vibrazione a ogni giro<input id="vibrazione" type="checkbox" ${settings.vibrate ? "checked" : ""}></label>
     </section>
-    <p class="hint">Versione ${VERSIONE_APP} · I progetti sono salvati su questo telefono.</p>`;
+    <p class="hint">Versione ${VERSIONE_APP}</p>`;
 }
 
 export const azioni = {
@@ -58,6 +66,8 @@ export const azioni = {
     avviso("Backup pronto");
   },
   "aggiorna-app": () => applicaAggiornamento(),
+  "esci-chiedi": () => conferma("Uscire dall'account? I progetti restano salvati online e li ritrovi quando rientri.", "Esci",
+    () => { azioniAccount.esci(); }),
 };
 
 export const cambio = {

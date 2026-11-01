@@ -3,7 +3,12 @@ import { nuovoProgetto, nuovaParte, nuovaNota } from "./modelli.js";
 
 export function cardigan() {
   const diminuzioni = () => [nuovaNota(36, 36, "Arrivata a 20 cm: inizia le diminuzioni")];
+  // Id e data fissi e "vecchi": su un telefono nuovo la versione online vince sempre
+  // e il cardigan non viene mai duplicato.
   return nuovoProgetto({
+    id: "cardigan-laura",
+    created: 1,
+    updated: 1,
     name: "Cardigan Laura",
     hook: "5,5",
     gauge: 18,

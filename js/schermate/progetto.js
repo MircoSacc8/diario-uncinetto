@@ -1,6 +1,6 @@
 // Scheda di un progetto: mette insieme i componenti, più modifica/stato/eliminazione del progetto.
 import { esc, num, ora } from "../utils/formato.js";
-import { S, aggiorna, salva, parteAttiva, fermaTimer } from "../dati/stato.js";
+import { S, aggiorna, salva, parteAttiva, fermaTimer, eliminaProgetto } from "../dati/stato.js";
 import { nuovoProgetto } from "../dati/modelli.js";
 import { apri, conferma, pulsanti } from "../componenti/finestre.js";
 import { avviso } from "../componenti/avvisi.js";
@@ -68,7 +68,7 @@ export const azioni = {
     avviso(p.status === "finito" ? "Progetto finito!" : "Progetto riaperto");
   },
   "progetto-elimina": ({ p }) => conferma(`Eliminare “${esc(p.name)}”? Non si può annullare.`, "Elimina", () => {
-    S.dati.projects = S.dati.projects.filter((x) => x.id !== p.id);
+    eliminaProgetto(p.id);
     S.vista.id = null;
   }),
 };

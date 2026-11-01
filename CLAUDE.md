@@ -34,6 +34,12 @@ Leggi prima `docs/ISTRUZIONI.md` (obiettivo, decisioni, piano a fasi, regole di 
 - Ogni file nuovo in `js/`, `css/`, `dati/`, `assets/` va aggiunto all'elenco `FILE` di `sw.js` (il test lo controlla).
 - Le icone si rigenerano con `python3 strumenti/crea-icone.py`.
 
+## Firebase (fase 2b)
+- Progetto `diario-uncinetto-c2c4e` (account Google di Mircuz), piano Spark gratuito, Firestore in eur3.
+- Codice in `js/firebase/`: `config.js` (dati pubblici), `sdk.js` (versione fissa da gstatic), `accesso.js` (Google), `sincronizza.js` (copia online), `account.js` (collega tutto all'app).
+- Regole in `firestore.rules`: se cambiano, vanno ripubblicate anche nella console Firebase.
+- Il telefono resta la copia principale; online è la copia di sicurezza e il passaggio tra telefoni.
+
 ## Test e pubblicazione
 - Test: `npm test` (Node 20+, nessuna installazione).
 - Pubblicazione: GitHub Pages dal branch `main`, cartella principale. Ogni fase chiusa ha un tag (`v1.0`, `v1.1`…).

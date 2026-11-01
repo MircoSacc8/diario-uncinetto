@@ -1,8 +1,9 @@
 // Service worker: fa funzionare l'app anche senza internet.
 // A OGNI RILASCIO aumenta VERSIONE (uguale a js/versione.js) e, se aggiungi file, mettili in FILE.
-const VERSIONE = "1.1.0";
+const VERSIONE = "1.2.0";
 const CACHE = `uncinetto-${VERSIONE}`;
 const CACHE_FONT = "uncinetto-font";
+const CACHE_FIREBASE = "uncinetto-firebase";
 
 // Tutti i file dell'app (test/pwa.test.js controlla che non manchi nessuno)
 const FILE = [
@@ -41,6 +42,12 @@ const FILE = [
   "js/schermate/home.js",
   "js/schermate/progetto.js",
   "js/schermate/impostazioni.js",
+  "js/schermate/accesso.js",
+  "js/firebase/config.js",
+  "js/firebase/sdk.js",
+  "js/firebase/accesso.js",
+  "js/firebase/sincronizza.js",
+  "js/firebase/account.js",
 ];
 
 // Installazione: scarica tutti i file della nuova versione
@@ -52,7 +59,7 @@ self.addEventListener("install", (e) => {
 self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches.keys()
-      .then((nomi) => Promise.all(nomi.filter((n) => n !== CACHE && n !== CACHE_FONT).map((n) => caches.delete(n))))
+      .then((nomi) => Promise.all(nomi.filter((n) => n !== CACHE && n !== CACHE_FONT && n !== CACHE_FIREBASE).map((n) => caches.delete(n))))
       .then(() => self.clients.claim())
   );
 });
@@ -67,9 +74,12 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
 
-  // Font di Google: dalla cache se ci sono, altrimenti scaricati e salvati
-  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
-    e.respondWith(caches.open(CACHE_FONT).then(async (c) => {
+  // Font di Google e programma di Firebase (versione fissa): dalla cache se ci sono,
+  // altrimenti scaricati e salvati. I dati di Firebase invece passano sempre da internet.
+  const font = url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";
+  const firebase = url.hostname === "www.gstatic.com" && url.pathname.startsWith("/firebasejs/");
+  if (font || firebase) {
+    e.respondWith(caches.open(font ? CACHE_FONT : CACHE_FIREBASE).then(async (c) => {
       const salvato = await c.match(req);
       if (salvato) return salvato;
       const risposta = await fetch(req);

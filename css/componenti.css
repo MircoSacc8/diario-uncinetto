@@ -127,3 +127,9 @@
 .striscia { width: 100%; min-height: var(--tocco); border-radius: 14px; padding: 10px 14px; background: var(--mint); color: var(--mint-ink); font-weight: 600; text-align: left; }
 .striscia.attenzione { background: var(--accent-soft); color: var(--warn); }
 .interruttore input { accent-color: var(--accent); }
+
+/* ---- Schermata di accesso ---- */
+.accesso { min-height: calc(100dvh - 80px - var(--sicuro-su) - var(--sicuro-giu)); display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+.accesso p { margin: 0; }
+.accesso-icona { width: 96px; height: 96px; border-radius: 22px; }
+.btn:disabled { opacity: .6; }

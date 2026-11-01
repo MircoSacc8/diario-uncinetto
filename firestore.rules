@@ -1,0 +1,12 @@
+rules_version = '2';
+
+// Regole di sicurezza del database (Firebase → Firestore → Regole).
+// Ognuno legge e scrive solo i propri dati, sotto utenti/{suo id}. Tutto il resto è chiuso.
+// Se le modifichi qui, copiale anche nella console Firebase.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /utenti/{uid}/{documento=**} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}

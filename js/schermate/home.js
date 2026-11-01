@@ -4,6 +4,7 @@ import { S, aggiorna, parteAttiva, tempoTrascorso } from "../dati/stato.js";
 import { moduloProgetto } from "./progetto.js";
 import { backupDaFare, istruzioniHome } from "./impostazioni.js";
 import { aggiornamentoPronto } from "../pwa/installa.js";
+import { testoStato } from "../firebase/account.js";
 
 const FILTRI = ["in corso", "finito", "tutti"];
 
@@ -43,7 +44,7 @@ export function html() {
     <div class="lista">${lista.length ? lista.map(scheda).join("")
       : `<div class="vuoto">Nessun progetto qui.<br>Tocca “Nuovo progetto” per iniziare a contare.</div>`}</div>
     ${istruzioniHome()}
-    <p class="hint">I progetti sono salvati su questo telefono.</p>`;
+    <p class="hint" id="stato-sync">${testoStato()}</p>`;
 }
 
 export const azioni = {

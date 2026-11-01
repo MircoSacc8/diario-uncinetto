@@ -4,6 +4,8 @@ import * as home from "./schermate/home.js";
 import * as scheda from "./schermate/progetto.js";
 import * as impostazioni from "./schermate/impostazioni.js";
 import * as pwa from "./pwa/installa.js";
+import * as schermataAccesso from "./schermate/accesso.js";
+import * as account from "./firebase/account.js";
 import * as finestre from "./componenti/finestre.js";
 import * as parti from "./componenti/parti.js";
 import * as contagiri from "./componenti/contagiri.js";
@@ -14,7 +16,7 @@ import * as contatori from "./componenti/contatori.js";
 import * as punti from "./componenti/punti.js";
 import * as filati from "./componenti/filati.js";
 
-const moduli = [home, scheda, impostazioni, finestre, parti, contagiri, promemoria, timer, convertitore, contatori, punti, filati];
+const moduli = [account, home, scheda, impostazioni, finestre, parti, contagiri, promemoria, timer, convertitore, contatori, punti, filati];
 const azioni = Object.assign({}, ...moduli.map((m) => m.azioni || {}));
 const suInput = Object.assign({}, ...moduli.map((m) => m.input || {}));
 const suCambio = Object.assign({}, ...moduli.map((m) => m.cambio || {}));
@@ -29,7 +31,14 @@ function mostra() {
   const app = document.getElementById("app");
   const p = progetto();
   if (!p) S.vista.id = null;
-  app.innerHTML = p ? scheda.html(p) : S.vista.schermata === "impostazioni" ? impostazioni.html() : home.html();
+  const schermate = {
+    caricamento: schermataAccesso.caricamento,
+    accesso: schermataAccesso.html,
+    "senza-rete": schermataAccesso.senzaRete,
+    impostazioni: impostazioni.html,
+    home: home.html,
+  };
+  app.innerHTML = p ? scheda.html(p) : (schermate[S.vista.schermata] || home.html)();
   document.body.classList.toggle("con-barra", !!p);
   if (p) parti.dopoDisegno();
 }
@@ -61,11 +70,11 @@ async function inizia() {
   quandoCambia(mostra);
   quandoCambia(schermoAcceso);
   await punti.caricaElenco();
-  disegna();
   timer.avviaTicchettio();
   pwa.quandoAggiornamento(disegna);
   pwa.registra();
   pwa.datiPermanenti();
+  await account.avvia();
 }
 
 inizia();
