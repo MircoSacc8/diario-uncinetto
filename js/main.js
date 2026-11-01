@@ -18,8 +18,9 @@ import * as filati from "./componenti/filati.js";
 import * as campioni from "./componenti/campioni.js";
 import * as misura from "./componenti/misura.js";
 import * as uncinetto from "./componenti/uncinetto.js";
+import * as foto from "./componenti/foto.js";
 
-const moduli = [account, schermataAccesso, home, scheda, impostazioni, finestre, parti, contagiri, promemoria, timer, convertitore, contatori, punti, filati, campioni, misura];
+const moduli = [account, schermataAccesso, home, scheda, impostazioni, finestre, parti, contagiri, promemoria, timer, convertitore, contatori, punti, filati, campioni, misura, foto];
 const azioni = Object.assign({}, ...moduli.map((m) => m.azioni || {}));
 const suInput = Object.assign({}, ...moduli.map((m) => m.input || {}));
 const suCambio = Object.assign({}, ...moduli.map((m) => m.cambio || {}));
@@ -44,6 +45,7 @@ function mostra() {
   app.innerHTML = p ? scheda.html(p) : (schermate[S.vista.schermata] || home.html)();
   document.body.classList.toggle("con-barra", !!p);
   if (p) parti.dopoDisegno();
+  foto.riempi(app);
 }
 
 document.addEventListener("click", (e) => {

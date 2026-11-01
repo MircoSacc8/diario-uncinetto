@@ -1,5 +1,12 @@
 # Novità
 
+## v1.6 — 1 novembre 2026 (fase 3b)
+- Nuova sezione **Foto** in ogni progetto: **Ispirazione** e **Lavoro finito** (fino a 6 per gruppo), dalla galleria o fatte al momento.
+- Tocca una foto per vederla grande, aggiungere una didascalia o eliminarla.
+- **Link alla fonte d'ispirazione** (Pinterest, Instagram, Ravelry…).
+- Nella lista dei progetti compare la miniatura: il lavoro finito, altrimenti l'ispirazione.
+- Le foto vengono rimpicciolite (lato lungo 1200 px, circa 150 KB) e salvate sul telefono e online, gratis. Il backup su file include anche le foto.
+
 ## v1.5 — 1 novembre 2026 (fase 3)
 - Uncinetto con **tipo** (normale o tunisino) e **misura** scelta da un elenco, per il progetto e, se diverso, per ogni parte (con nota, es. "5 poi 6").
 - Obiettivo di ogni parte **in cm** ("arrivare a 43 cm") oppure in giri. Con i cm, il contagiri mostra a che punto sei e quanti giri mancano circa.

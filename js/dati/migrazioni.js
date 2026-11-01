@@ -3,7 +3,7 @@
 import { uid } from "../utils/formato.js";
 import { nuovaParte, nuovaNota, nuovoUncinetto, nuovoCampione } from "./modelli.js";
 
-export const VERSIONE_DATI = 2;
+export const VERSIONE_DATI = 3;
 
 // Primo numero in un testo: "5,5" → 5.5, "5 poi 6" → 5. Nessun numero → null
 export function primoNumero(testo) {
@@ -20,6 +20,9 @@ export function normalizzaProgetto(p) {
   p.notes ??= "";
   p.stitchCount ??= 0;
   p.status ??= "in corso";
+  // Versione 3: foto (solo id, tipo e didascalia; le immagini stanno in js/foto/archivio.js)
+  p.foto = Array.isArray(p.foto) ? p.foto : [];
+  p.ispirazioneLink ??= "";
 
   // Versione 0: prima delle "parti" giri e promemoria stavano nel progetto
   if (!Array.isArray(p.parts) || !p.parts.length) {

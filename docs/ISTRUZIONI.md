@@ -95,7 +95,7 @@ Repository: `MircoSacc8/diario-uncinetto` (pubblica, per GitHub Pages gratuito).
 - **v1.3** (1 nov 2026): accesso anche con email e password (deciso da Mircuz per evitare problemi della finestra Google sull'iPhone), "Crea account", "Password dimenticata?". Chiave web Firebase limitata ai domini dell'app in Google Cloud (avviso GitHub "secret detected" atteso: la chiave è pubblica per design).
 - **v1.4** (1 nov 2026): colori beige chiaro e rosa antico (scelta B di Mircuz), app sempre chiara anche in modalità scura, icona ricolorata. Mircuz ha provato su iPhone l'accesso con email e password: funziona.
 - **Fase 3** (1 nov 2026, v1.5): uncinetto tipo + mm (progetto e parte), obiettivi parte in cm o giri, 📏 misura col metro (vince sul campione), campioni multipli per filato/uncinetto, catenelle da larghezza, convertitore cm ↔ giri/maglie. Dati versione 2 con migrazione automatica.
-- **Prossima: fase 3b** — foto di ispirazione e del lavoro finito (approvata): foto compresse ~1200 px salvate in Firestore (`utenti/{uid}/foto/{id}`, niente Cloud Storage a pagamento) + link alla fonte d'ispirazione.
+- **Fase 3b** (1 nov 2026, v1.6): foto di ispirazione e del lavoro finito (max 6 per gruppo), didascalia, link alla fonte, miniatura nella lista; foto compresse salvate su telefono (IndexedDB) e online in Firestore `utenti/{uid}/foto/{id}`; incluse nel backup. Dati versione 3.
 - **Poi: fase 4** — direzione di lavoro (dal basso / top-down con aumenti); **fase 5** — taglie e "Rifai in un'altra taglia".
 
 Fasi:

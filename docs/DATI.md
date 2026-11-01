@@ -1,4 +1,4 @@
-# Formato dei dati (versione dati 2)
+# Formato dei dati (versione dati 3)
 
 Salvati nel telefono, chiave `diario-uncinetto` di localStorage.
 
@@ -26,6 +26,8 @@ stato
 | counters[] | contatori extra: { id, name, n } |
 | time, timerStart | tempo accumulato (ms) e inizio del timer acceso (ms o null) |
 | parts[], active | parti del capo e id della parte aperta |
+| foto[] | `{ id, tipo: "ispirazione" \| "finito", didascalia, aggiunta }` (le immagini stanno a parte, vedi sotto) |
+| ispirazioneLink | link alla fonte d'ispirazione ("" se nessuno) |
 | created, updated | date (ms) |
 
 ## Parte
@@ -49,7 +51,13 @@ Un progetto eliminato resta come documento con `eliminato: true` (così non rico
 Unione: `js/calcoli/unione.js` → `unisciRemoti` (vince `updated` più recente; vedi test/unione.test.js).
 `updated` viene aggiornato da `salva()` in `js/dati/stato.js` per ogni progetto il cui contenuto è cambiato.
 
+## Foto
+Immagini JPEG in base64 (lato lungo 1200 px + miniatura 240 px), mai dentro il progetto:
+- sul telefono: IndexedDB `diario-uncinetto-foto`, store `foto`, chiave id;
+- online: `utenti/{uid}/foto/{id}` → `{ progetto, foto, miniatura, creata }` (senza il prefisso `data:`).
+Codice: `js/foto/comprimi.js` (rimpicciolisce) e `js/foto/archivio.js` (telefono + online). Niente Cloud Storage: sul piano gratuito non è disponibile.
+
 ## File di backup
-`{ app: "diario-uncinetto", versioneDati, esportatoIl, dati: stato }`. All'importazione i progetti si uniscono per id (vince `updated` più recente).
+`{ app: "diario-uncinetto", versioneDati, esportatoIl, dati: stato, foto: { id: { foto, miniatura, progetto } } }`. All'importazione i progetti si uniscono per id (vince `updated` più recente).
 
 Cambiando formato: aumentare `VERSIONE_DATI`, aggiungere la migrazione e il suo test.

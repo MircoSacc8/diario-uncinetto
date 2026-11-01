@@ -159,3 +159,24 @@ form:has(#p-unc-diverso:checked) .se-diverso { display: flex; }
 .campione .t strong { display: block; }
 .campione .t span { color: var(--muted); font-size: .85rem; }
 .campione .misura { font-size: .85rem; font-weight: 600; text-align: right; max-width: 45%; }
+
+/* ---- Foto ---- */
+.foto-gruppo { display: flex; flex-direction: column; gap: 8px; }
+.foto-griglia { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.foto-mini { aspect-ratio: 1; max-width: 100%; border-radius: 12px; overflow: hidden; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; }
+.foto-mini img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foto-mini img:not([src]) { visibility: hidden; }
+.foto-mini.aggiungi { border: 1.5px dashed var(--line); background: var(--bg); color: var(--muted); font-weight: 600; font-size: .9rem; }
+.foto-mini.in-arrivo::after { content: "in arrivo"; position: absolute; font-size: .7rem; color: var(--muted); }
+.foto-mini { position: relative; }
+.foto-grande { margin: -4px -2px 0; border-radius: 14px; overflow: hidden; background: var(--bg); }
+.foto-grande img { width: 100%; max-height: 60dvh; object-fit: contain; display: block; }
+
+/* Copertina nella lista dei progetti */
+.proj.con-foto { grid-template-columns: 56px 1fr auto; }
+.proj.con-foto .nome, .proj.con-foto .meta { grid-column: 2; }
+.proj.con-foto .conta { grid-column: 3; }
+.proj-foto { grid-row: 1 / 3; grid-column: 1; width: 56px; height: 56px; border-radius: 12px; overflow: hidden; background: var(--accent-soft); }
+.proj-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.proj-foto img:not([src]) { visibility: hidden; }
+.proj.con-foto .barretta { grid-column: 2 / -1; }

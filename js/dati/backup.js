@@ -6,17 +6,21 @@ const APP = "diario-uncinetto";
 
 // ---- Parte pura (testata in test/backup.test.js) ----
 
-export function creaBackup(dati, quando = Date.now()) {
-  return { app: APP, versioneDati: VERSIONE_DATI, esportatoIl: new Date(quando).toISOString(), dati };
+// "foto" (facoltativo): { id: { foto, miniatura, progetto } } con le immagini in base64
+export function creaBackup(dati, quando = Date.now(), foto = {}) {
+  return { app: APP, versioneDati: VERSIONE_DATI, esportatoIl: new Date(quando).toISOString(), dati, foto };
 }
 
 // Legge il testo di un file di backup. Lancia un errore con un messaggio chiaro se non va bene
-export function leggiBackup(testo) {
+export function leggiBackupCompleto(testo) {
   let contenuto;
   try { contenuto = JSON.parse(testo); } catch { throw new Error("Il file non è un backup del Diario: non riesco a leggerlo."); }
   if (contenuto?.app !== APP || !contenuto.dati) throw new Error("Questo file non è un backup del Diario dell'Uncinetto.");
-  return normalizzaStato(structuredClone(contenuto.dati));
+  const foto = contenuto.foto && typeof contenuto.foto === "object" ? contenuto.foto : {};
+  return { stato: normalizzaStato(structuredClone(contenuto.dati)), foto };
 }
+
+export const leggiBackup = (testo) => leggiBackupCompleto(testo).stato;
 
 export function nomeFile(quando = Date.now()) {
   const d = new Date(quando);
@@ -34,8 +38,8 @@ export function importaNeiDati(dati, daBackup) {
 // ---- Parte che usa il telefono ----
 
 // Su iPhone apre il menu Condividi (Salva in File, iCloud, WhatsApp…); altrove scarica il file
-export async function esportaFile(dati) {
-  const testo = JSON.stringify(creaBackup(dati), null, 2);
+export async function esportaFile(dati, foto = {}) {
+  const testo = JSON.stringify(creaBackup(dati, Date.now(), foto));
   const nome = nomeFile();
   const file = new File([testo], nome, { type: "application/json" });
   if (navigator.canShare?.({ files: [file] })) {

@@ -47,3 +47,15 @@ test("Importare un backup più vecchio non torna indietro", () => {
 test("Nome del file con la data", () => {
   assert.equal(nomeFile(new Date(2026, 10, 1).getTime()), "diario-uncinetto-2026-11-01.json");
 });
+
+import { leggiBackupCompleto } from "../js/dati/backup.js";
+
+test("Le foto viaggiano nel backup e non finiscono dentro i progetti", () => {
+  const dati = statoDiProva();
+  dati.projects[0].foto = [{ id: "f1", tipo: "finito", didascalia: "Davanti" }];
+  const foto = { f1: { foto: "data:image/jpeg;base64,AAA", miniatura: "data:image/jpeg;base64,BB", progetto: dati.projects[0].id } };
+  const { stato, foto: lette } = leggiBackupCompleto(JSON.stringify(creaBackup(dati, Date.now(), foto)));
+  assert.deepEqual(lette, foto);
+  assert.equal(stato.foto, undefined);
+  assert.equal(stato.projects[0].foto[0].didascalia, "Davanti");
+});

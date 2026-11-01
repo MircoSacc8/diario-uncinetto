@@ -12,6 +12,7 @@ import * as contatori from "../componenti/contatori.js";
 import * as punti from "../componenti/punti.js";
 import * as filati from "../componenti/filati.js";
 import * as campioni from "../componenti/campioni.js";
+import * as foto from "../componenti/foto.js";
 import * as uncinetto from "../componenti/uncinetto.js";
 import { uncinettoTesto, campioneTesto } from "../calcoli/misure.js";
 
@@ -34,6 +35,7 @@ export function html(p) {
     ${contatori.html(p)}
     ${punti.html(p)}
     ${filati.html(p)}
+    ${foto.html(p)}
     <section class="card"><h2>Schema e appunti</h2>
       ${p.pattern ? `<div><div class="eyebrow">Schema</div>${esc(p.pattern)}</div>` : ""}
       <label for="appunti">Appunti<textarea id="appunti" placeholder="Misure, modifiche allo schema, idee…">${esc(p.notes)}</textarea></label>
@@ -70,6 +72,7 @@ export const azioni = {
     avviso(p.status === "finito" ? "Progetto finito!" : "Progetto riaperto");
   },
   "progetto-elimina": ({ p }) => conferma(`Eliminare “${esc(p.name)}”? Non si può annullare.`, "Elimina", () => {
+    foto.eliminaFotoDi(p);
     eliminaProgetto(p.id);
     S.vista.id = null;
   }),

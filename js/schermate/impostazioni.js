@@ -1,6 +1,7 @@
 // Schermata impostazioni: backup, installazione sulla Home, vibrazione, versione.
 import { S, aggiorna, salva } from "../dati/stato.js";
-import { esportaFile, leggiBackup, importaNeiDati } from "../dati/backup.js";
+import { esportaFile, leggiBackupCompleto, importaNeiDati } from "../dati/backup.js";
+import * as archivio from "../foto/archivio.js";
 import { avviso } from "../componenti/avvisi.js";
 import { suHome, suIphone, aggiornamentoPronto, applicaAggiornamento } from "../pwa/installa.js";
 import { VERSIONE_APP } from "../versione.js";
@@ -44,7 +45,7 @@ export function html() {
       ${settings.uid ? `<button class="btn ghost" data-a="esci-chiedi">Esci dall'account</button>` : ""}
     </section>
     <section class="card"><h2>Backup dei progetti</h2>
-      <p class="testo-muto">Salva un file con tutti i progetti in File o iCloud. Se cambi telefono, lo reimporti e ritrovi tutto.</p>
+      <p class="testo-muto">Salva un file con tutti i progetti e le foto in File o iCloud. Se cambi telefono, lo reimporti e ritrovi tutto.</p>
       <p class="${backupDaFare() ? "attenzione" : "hint"}">${ultimo}</p>
       <button class="btn" data-a="backup-esporta">Esporta backup</button>
       <label class="btn ghost carica" for="backup-file">Importa backup<input id="backup-file" type="file" accept="application/json,.json" hidden></label>
@@ -59,7 +60,9 @@ export function html() {
 export const azioni = {
   "impostazioni": () => { S.vista.id = null; S.vista.schermata = "impostazioni"; aggiorna(); scrollTo(0, 0); },
   "backup-esporta": async () => {
-    const fatto = await esportaFile(S.dati);
+    const ids = S.dati.projects.flatMap((p) => (p.foto || []).map((f) => f.id));
+    if (ids.length) avviso("Preparo il backup con le foto…");
+    const fatto = await esportaFile(S.dati, await archivio.tutte(ids));
     if (!fatto) return;
     S.dati.settings.lastBackup = Date.now();
     aggiorna();
@@ -77,7 +80,12 @@ export const cambio = {
     el.value = "";
     if (!file) return;
     try {
-      const { aggiunti, aggiornati } = importaNeiDati(S.dati, leggiBackup(await file.text()));
+      const { stato, foto } = leggiBackupCompleto(await file.text());
+      const { aggiunti, aggiornati } = importaNeiDati(S.dati, stato);
+      // Foto del backup che su questo telefono mancano
+      for (const [id, f] of Object.entries(foto)) {
+        if (!(await archivio.leggi(id))) await archivio.salva(id, f.progetto, f);
+      }
       aggiorna();
       avviso(aggiunti + aggiornati ? `Importati: ${aggiunti} nuovi, ${aggiornati} aggiornati` : "Nessuna novità: hai già tutto");
     } catch (e) {

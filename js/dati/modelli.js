@@ -28,6 +28,7 @@ export function nuovoProgetto(altro = {}) {
   return {
     id: uid(), name: "", status: "in corso", uncinetto: nuovoUncinetto(), pattern: "",
     campioni: [], campione: "",
+    foto: [], ispirazioneLink: "",
     stitchCount: 0, stitches: [], yarns: [], counters: [], notes: "",
     time: 0, timerStart: null, created: ora(), updated: ora(),
     ...altro,

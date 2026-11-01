@@ -6,6 +6,7 @@ import { backupDaFare, istruzioniHome } from "./impostazioni.js";
 import { aggiornamentoPronto } from "../pwa/installa.js";
 import { testoStato } from "../firebase/account.js";
 import { campioneDi, percentuale, uncinettoTesto } from "../calcoli/misure.js";
+import { copertina } from "../componenti/foto.js";
 
 const FILTRI = ["in corso", "finito", "tutti"];
 
@@ -19,7 +20,9 @@ function scheda(p) {
     tempo > 59999 && durata(tempo, false),
     p.timerStart && '<span class="acceso"></span>timer acceso',
   ].filter(Boolean).join(" · ");
-  return `<button class="proj" data-a="apri" data-v="${p.id}">
+  const img = copertina(p);
+  return `<button class="proj${img ? " con-foto" : ""}" data-a="apri" data-v="${p.id}">
+    ${img}
     <span class="nome">${esc(p.name)}${p.status === "finito" ? '<span class="tag">finito</span>' : ""}</span>
     <span class="conta">${a.rounds}<small>giri</small></span>
     <span class="meta">${meta}</span>

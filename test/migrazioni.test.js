@@ -88,3 +88,12 @@ test("Il Cardigan d'esempio: 7 parti, campione a 18 giri, maniche a 43 cm", () =
   assert.equal(p.campioni[0].giri10, 18);
   assert.deepEqual(p.parts.find((x) => x.name === "Manica dx").obiettivo, { tipo: "cm", valore: 43 });
 });
+
+test("Versione 3: ogni progetto ha l'elenco foto e il link d'ispirazione", () => {
+  const p = normalizzaProgetto(cardiganV1());
+  assert.deepEqual(p.foto, []);
+  assert.equal(p.ispirazioneLink, "");
+  const conFoto = normalizzaProgetto({ ...cardiganV1(), foto: [{ id: "f1", tipo: "ispirazione", didascalia: "" }], ispirazioneLink: "https://esempio.it" });
+  assert.equal(conFoto.foto.length, 1);
+  assert.equal(conFoto.ispirazioneLink, "https://esempio.it");
+});
