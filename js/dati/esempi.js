@@ -1,4 +1,5 @@
-// Progetto caricato al primo avvio: il Cardigan Laura (taglia S, uncinetto 5,5, dal basso in alto).
+// Cardigan Laura (taglia S, uncinetto 5,5, dal basso in alto): dati di prova per i test.
+// Dalla versione 1.8.2 NON viene più caricato nell'app al primo avvio.
 import { nuovoProgetto, nuovaParte, nuovaNota, nuovoCampione, nuovoUncinetto } from "./modelli.js";
 
 export function cardigan() {

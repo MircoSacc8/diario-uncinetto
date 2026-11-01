@@ -1,8 +1,7 @@
 // Lo stato dell'app: i dati salvati e cosa si sta guardando.
 // Tutti i componenti leggono da qui e, dopo una modifica, chiamano aggiorna().
 import { carica, scrivi } from "./salvataggio.js";
-import { normalizzaStato } from "./migrazioni.js";
-import { cardigan } from "./esempi.js";
+import { normalizzaStato, rimuoviEsempio } from "./migrazioni.js";
 import { ora } from "../utils/formato.js";
 
 export const S = {
@@ -25,7 +24,9 @@ export function ricordaImpronte() {
 }
 
 export function avvia() {
-  S.dati = normalizzaStato(carica() || { updatedAt: 0, projects: [cardigan()] });
+  // Chi entra la prima volta parte senza progetti
+  S.dati = normalizzaStato(carica() || { updatedAt: 0, projects: [] });
+  if (rimuoviEsempio(S.dati)) scrivi(S.dati);
   ricordaImpronte();
 }
 

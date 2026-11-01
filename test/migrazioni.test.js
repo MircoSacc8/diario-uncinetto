@@ -97,3 +97,20 @@ test("Versione 3: ogni progetto ha l'elenco foto e il link d'ispirazione", () =>
   assert.equal(conFoto.foto.length, 1);
   assert.equal(conFoto.ispirazioneLink, "https://esempio.it");
 });
+
+import { rimuoviEsempio, ID_ESEMPIO } from "../js/dati/migrazioni.js";
+
+test("Il Cardigan d'esempio mai toccato viene tolto e segnato come eliminato", () => {
+  const s = normalizzaStato({ projects: [cardigan(), { id: "vero", name: "Borsa", updated: 50 }] });
+  assert.equal(rimuoviEsempio(s, 999), true);
+  assert.deepEqual(s.projects.map((p) => p.id), ["vero"]);
+  assert.equal(s.eliminati[ID_ESEMPIO], 999);
+  assert.equal(rimuoviEsempio(s), false, "una seconda volta non fa nulla");
+});
+
+test("Il Cardigan d'esempio già modificato resta (è diventato un progetto vero)", () => {
+  const c = cardigan(); c.updated = 1_800_000_000_000;
+  const s = normalizzaStato({ projects: [c] });
+  assert.equal(rimuoviEsempio(s), false);
+  assert.equal(s.projects.length, 1);
+});

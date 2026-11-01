@@ -70,6 +70,18 @@ export function normalizzaProgetto(p) {
   return p;
 }
 
+// Il "Cardigan Laura" era solo un esempio caricato al primo avvio (versioni fino alla 1.8.1)
+// ed è finito anche negli account. Se non è mai stato toccato (data di modifica ancora 1), lo tolgo
+// segnandolo come eliminato, così sparisce anche online e dagli altri telefoni.
+export const ID_ESEMPIO = "cardigan-laura";
+export function rimuoviEsempio(s, adesso = Date.now()) {
+  const esempio = s.projects.find((p) => p.id === ID_ESEMPIO);
+  if (!esempio || (esempio.updated || 0) > 1) return false;
+  s.projects = s.projects.filter((p) => p.id !== ID_ESEMPIO);
+  s.eliminati[ID_ESEMPIO] = adesso;
+  return true;
+}
+
 export function normalizzaStato(s) {
   s = s && typeof s === "object" ? s : {};
   s.settings ??= { vibrate: true };

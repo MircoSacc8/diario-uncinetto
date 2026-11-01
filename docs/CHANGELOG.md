@@ -1,5 +1,9 @@
 # Novità
 
+## v1.8.2 — 1 novembre 2026
+- Chi entra la prima volta parte **senza progetti**: il "Cardigan Laura" era solo un esempio e non viene più caricato.
+- Il Cardigan d'esempio già finito negli account viene tolto da solo (anche online e dagli altri telefoni), se non è mai stato modificato.
+
 ## v1.8.1 — 1 novembre 2026
 - Tolto "Accedi con Google" dalla schermata di accesso (deciso da Mircuz): si entra solo con email e password, che funziona sempre anche dall'app sulla Home.
 

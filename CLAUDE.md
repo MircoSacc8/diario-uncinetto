@@ -13,7 +13,7 @@ Leggi prima `docs/ISTRUZIONI.md` (obiettivo, decisioni, piano a fasi, regole di 
 - `index.html` solo scheletro. Niente codice dentro.
 - `css/` → `temi.css` (colori beige e rosa antico, sempre tema chiaro; font, misure), `base.css` (impaginazione), `componenti.css` (una sezione per componente).
 - `js/main.js` → avvio e smistamento dei tocchi (`data-a="nome-azione"`).
-- `js/dati/` → stato, salvataggio, modelli, migrazioni, progetto di esempio.
+- `js/dati/` → stato, salvataggio, modelli, migrazioni. `esempi.js` (Cardigan) serve solo ai test: l'app parte senza progetti.
 - `js/calcoli/` → funzioni pure (niente DOM), sempre con test in `test/`.
 - `js/componenti/` → ogni componente esporta `html(...)`, `azioni` e se serve `input` / `cambio` (per id del campo).
 - `js/schermate/` → `home.js` (lista) e `progetto.js` (scheda), che compongono i componenti.

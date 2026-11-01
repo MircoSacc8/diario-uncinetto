@@ -3,7 +3,7 @@
 // Il telefono resta la copia principale: online va ogni modifica, e da online arriva
 // ciò che è stato cambiato su un altro telefono.
 import { S, salvaArrivati, disegnaDaFuori, quandoSalva } from "../dati/stato.js";
-import { normalizzaProgetto } from "../dati/migrazioni.js";
+import { normalizzaProgetto, rimuoviEsempio } from "../dati/migrazioni.js";
 import { unisciRemoti } from "../calcoli/unione.js";
 import { firestore } from "./accesso.js";
 
@@ -123,6 +123,7 @@ function applica(remoti) {
   const { progetti, eliminati } = unisciRemoti(S.dati.projects, S.dati.eliminati, remoti);
   S.dati.projects = progetti;
   S.dati.eliminati = eliminati;
+  if (rimuoviEsempio(S.dati)) programmaInvio();   // l'esempio arrivato da online va tolto anche lì
   salvaArrivati();
   disegnaDaFuori();
 }
