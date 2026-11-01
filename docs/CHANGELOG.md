@@ -1,5 +1,11 @@
 # Novità
 
+## v1.3 — 1 novembre 2026
+- Accesso anche con **email e password**, accanto a Google: nessuna finestra da aprire, quindi funziona sempre anche dall'app aggiunta alla Home.
+- "Crea account" e "Password dimenticata?" (arriva un'email in italiano per sceglierne una nuova).
+- Messaggi di errore in italiano; il tasto "Vai" della tastiera fa entrare.
+- Sicurezza: la chiave web di Firebase è limitata ai domini dell'app (`mircosacc8.github.io`, `diario-uncinetto-c2c4e.firebaseapp.com`).
+
 ## v1.2 — 1 novembre 2026 (fase 2b)
 - Accesso con Google obbligatorio al primo avvio. Ognuno vede solo i propri progetti.
 - I progetti si salvano online su Firebase (Europa) a ogni modifica; senza rete restano in coda e partono appena c'è connessione.

@@ -16,7 +16,7 @@ import * as contatori from "./componenti/contatori.js";
 import * as punti from "./componenti/punti.js";
 import * as filati from "./componenti/filati.js";
 
-const moduli = [account, home, scheda, impostazioni, finestre, parti, contagiri, promemoria, timer, convertitore, contatori, punti, filati];
+const moduli = [account, schermataAccesso, home, scheda, impostazioni, finestre, parti, contagiri, promemoria, timer, convertitore, contatori, punti, filati];
 const azioni = Object.assign({}, ...moduli.map((m) => m.azioni || {}));
 const suInput = Object.assign({}, ...moduli.map((m) => m.input || {}));
 const suCambio = Object.assign({}, ...moduli.map((m) => m.cambio || {}));
@@ -48,6 +48,12 @@ document.addEventListener("click", (e) => {
   if (!el) return;
   const fn = azioni[el.dataset.a];
   if (fn) fn(contesto(el));
+});
+// Tasto "Vai" della tastiera nel modulo di accesso
+document.addEventListener("submit", (e) => {
+  if (e.target.id !== "modulo-accesso") return;
+  e.preventDefault();
+  azioni["entra-email"]?.(contesto(e.target));
 });
 document.addEventListener("input", (e) => suInput[e.target.id]?.(e.target, contesto(e.target)));
 document.addEventListener("change", (e) => suCambio[e.target.id]?.(e.target, contesto(e.target)));

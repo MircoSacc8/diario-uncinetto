@@ -5,6 +5,23 @@ import * as sincronizza from "./sincronizza.js";
 import * as schermataAccesso from "../schermate/accesso.js";
 import { avviso } from "../componenti/avvisi.js";
 
+function mostraErrore(m) { schermataAccesso.impostaMessaggio(m); disegna(); }
+
+// Prova ad accedere (Google o email): se va, entra nell'app; se no, mostra il motivo
+async function tenta(fn) {
+  schermataAccesso.impostaMessaggio("");
+  schermataAccesso.impostaInCorso(true);
+  disegna();
+  try {
+    const u = await fn();
+    schermataAccesso.pulisci();
+    collega(u);
+  } catch (e) {
+    schermataAccesso.impostaInCorso(false);
+    mostraErrore(e.message);
+  }
+}
+
 const vai = (schermata) => { S.vista.id = null; S.vista.schermata = schermata; disegna(); };
 
 function collega(u) {
@@ -43,18 +60,28 @@ export function testoStato() {
 }
 
 export const azioni = {
-  "accedi": async () => {
-    schermataAccesso.impostaMessaggio("");
-    schermataAccesso.impostaInCorso(true);
-    disegna();
+  "accedi": () => tenta(() => accesso.entra()),
+  "entra-email": () => {
+    const { email, password } = schermataAccesso.credenziali();
+    if (!email.trim()) return mostraErrore("Scrivi la tua email.");
+    tenta(() => accesso.entraConEmail(email, password));
+  },
+  "crea-account": () => {
+    const { email, password } = schermataAccesso.credenziali();
+    if (!email.trim()) return mostraErrore("Scrivi l'email che vuoi usare.");
+    if (password.length < 6) return mostraErrore("Scegli una password di almeno 6 caratteri.");
+    tenta(() => accesso.creaAccount(email, password));
+  },
+  "password-dimenticata": async () => {
+    const { email } = schermataAccesso.credenziali();
+    if (!email.trim()) return mostraErrore("Scrivi prima la tua email, poi tocca di nuovo \"Password dimenticata?\".");
     try {
-      collega(await accesso.entra());
+      await accesso.recuperaPassword(email);
+      schermataAccesso.impostaConferma(`Ti ho mandato un'email a ${email.trim()} per scegliere una nuova password. Controlla anche la posta indesiderata.`);
     } catch (e) {
-      schermataAccesso.impostaInCorso(false);
       schermataAccesso.impostaMessaggio(e.message);
-      disegna();
     }
-    schermataAccesso.impostaInCorso(false);
+    disegna();
   },
   "riprova": () => location.reload(),
   // Esce: i progetti restano online e spariscono da questo telefono finché non si rientra

@@ -129,7 +129,12 @@
 .interruttore input { accent-color: var(--accent); }
 
 /* ---- Schermata di accesso ---- */
-.accesso { min-height: calc(100dvh - 80px - var(--sicuro-su) - var(--sicuro-giu)); display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+.accesso { min-height: calc(100dvh - 80px - var(--sicuro-su) - var(--sicuro-giu)); display: flex; flex-direction: column; justify-content: center; gap: 16px; }
 .accesso p { margin: 0; }
 .accesso-icona { width: 96px; height: 96px; border-radius: 22px; }
 .btn:disabled { opacity: .6; }
+.accesso-modulo { display: flex; flex-direction: column; gap: 12px; }
+.azioni-accesso { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.oppure { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .85rem; }
+.oppure::before, .oppure::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.conferma { color: var(--mint-ink); background: var(--mint); border-radius: 12px; padding: 10px 12px; }

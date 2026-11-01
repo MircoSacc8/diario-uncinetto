@@ -1,3 +1,3 @@
 // Versione dell'app mostrata nelle impostazioni.
 // Deve essere uguale a VERSIONE in sw.js (lo controlla test/pwa.test.js).
-export const VERSIONE_APP = "1.2.1";
+export const VERSIONE_APP = "1.3.0";
